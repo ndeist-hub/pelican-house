@@ -65,7 +65,79 @@ const STAFF = [
   },
 ];
 
+const BOOKED_DATES = [
+  // Format: { start: "YYYY-MM-DD", end: "YYYY-MM-DD", label: "Booked" }
+  // Add confirmed bookings here to block them on the calendar
+  // Example: { start: "2025-07-01", end: "2025-07-14", label: "Booked" },
+];
+
 const font = "'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif";
+
+function AvailabilityCalendar() {
+  const today = new Date();
+  const [viewDate, setViewDate] = useState(new Date(today.getFullYear(), today.getMonth(), 1));
+
+  const isBooked = (date) => {
+    const d = date.getTime();
+    return BOOKED_DATES.some(({ start, end }) => {
+      const s = new Date(start).getTime();
+      const e = new Date(end).getTime();
+      return d >= s && d <= e;
+    });
+  };
+
+  const isPast = (date) => date < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+  const prevMonth = () => setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1));
+  const nextMonth = () => setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1));
+
+  const year = viewDate.getFullYear();
+  const month = viewDate.getMonth();
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const monthName = viewDate.toLocaleDateString("en-GB", { month: "long", year: "numeric" });
+
+  const days = [];
+  for (let i = 0; i < firstDay; i++) days.push(null);
+  for (let d = 1; d <= daysInMonth; d++) days.push(new Date(year, month, d));
+
+  const cellStyle = (date) => {
+    if (!date) return { background: "transparent" };
+    if (isPast(date)) return { background: "#f5f5f5", color: "#ccc" };
+    if (isBooked(date)) return { background: "#1A3A4A", color: "#fff", fontWeight: 600 };
+    return { background: "#EDF7F0", color: "#1A5C30" };
+  };
+
+  return (
+    <div style={{ background: "#fff", borderRadius: 4, padding: 28, border: "1px solid rgba(26,58,74,0.08)", marginBottom: 40 }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
+        <button onClick={prevMonth} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#1A3A4A", padding: "4px 10px" }}>‹</button>
+        <span style={{ fontFamily: font, fontStyle: "italic", color: "#1A3A4A", fontSize: "1rem" }}>{monthName}</span>
+        <button onClick={nextMonth} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#1A3A4A", padding: "4px 10px" }}>›</button>
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 4, marginBottom: 8 }}>
+        {["Su","Mo","Tu","We","Th","Fr","Sa"].map(d => (
+          <div key={d} style={{ textAlign: "center", fontSize: "0.62rem", letterSpacing: "0.1em", color: "#aaa", textTransform: "uppercase", paddingBottom: 4 }}>{d}</div>
+        ))}
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 4 }}>
+        {days.map((date, i) => (
+          <div key={i} style={{ textAlign: "center", padding: "8px 2px", borderRadius: 3, fontSize: "0.82rem", ...cellStyle(date) }}>
+            {date ? date.getDate() : ""}
+          </div>
+        ))}
+      </div>
+      <div style={{ display: "flex", gap: 20, marginTop: 16, flexWrap: "wrap" }}>
+        {[["#EDF7F0","#A8D4B8","Available"],["#1A3A4A",null,"Booked"],["#f5f5f5","#eee","Past"]].map(([bg, border, label]) => (
+          <div key={label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <div style={{ width: 14, height: 14, borderRadius: 2, background: bg, border: border ? `1px solid ${border}` : "none" }} />
+            <span style={{ fontSize: "0.72rem", color: "#666" }}>{label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 const GoldLine = () => <div style={{ width: 48, height: 2, background: "#C9A84C", marginBottom: 36 }} />;
 
@@ -255,6 +327,10 @@ export default function App() {
           ))}
         </div>
 
+        <p style={{ fontSize: "0.62rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "#C9A84C", marginBottom: 16 }}>Availability</p>
+        <h3 style={{ fontSize: "1.4rem", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 28 }}>Check available dates below.</h3>
+        <AvailabilityCalendar />
+
         <p style={{ fontSize: "0.62rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "#C9A84C", marginBottom: 16 }}>Request a Booking</p>
         <h3 style={{ fontSize: "1.4rem", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 28 }}>We'll confirm availability and pricing within 24 hours.</h3>
         {bookingSubmitted ? (
@@ -265,21 +341,29 @@ export default function App() {
           </div>
         ) : (
           <div style={{ background: "#fff", borderRadius: 4, padding: 32, boxShadow: "0 2px 16px rgba(26,58,74,0.06)", border: "1px solid rgba(26,58,74,0.07)" }}>
-            <Label>Full Name</Label>
-            <input style={inputStyle} placeholder="Your name" value={bookingForm.name} onChange={e => setBookingForm({...bookingForm, name: e.target.value})} />
-            <Label>Email Address</Label>
-            <input type="email" style={inputStyle} placeholder="you@example.com" value={bookingForm.email} onChange={e => setBookingForm({...bookingForm, email: e.target.value})} />
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-              <div><Label>Check-in</Label><input type="date" style={inputStyle} value={bookingForm.checkin} onChange={e => setBookingForm({...bookingForm, checkin: e.target.value})} /></div>
-              <div><Label>Check-out</Label><input type="date" style={inputStyle} value={bookingForm.checkout} onChange={e => setBookingForm({...bookingForm, checkout: e.target.value})} /></div>
-            </div>
-            <Label>Number of Guests</Label>
-            <select style={inputStyle} value={bookingForm.guests} onChange={e => setBookingForm({...bookingForm, guests: e.target.value})}>
-              {["1","2","3","4","5","6"].map(n => <option key={n}>{n}</option>)}
-            </select>
-            <Label>Message (optional)</Label>
-            <textarea style={{ ...inputStyle, resize: "vertical", minHeight: 90 }} placeholder="Any special requirements or questions..." value={bookingForm.message} onChange={e => setBookingForm({...bookingForm, message: e.target.value})} />
-            <button onClick={handleBooking} style={{ background: "#C9A84C", color: "#1A3A4A", padding: "13px 36px", border: "none", borderRadius: 3, cursor: "pointer", fontFamily: font, fontSize: "0.72rem", letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 700 }}>Send Booking Request →</button>
+            <form
+              action="https://formspree.io/f/xqeylopw"
+              method="POST"
+              onSubmit={(e) => { e.preventDefault(); handleBooking(); fetch("https://formspree.io/f/xqeylopw", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: bookingForm.name, email: bookingForm.email, checkin: bookingForm.checkin, checkout: bookingForm.checkout, guests: bookingForm.guests, message: bookingForm.message, _replyto: bookingForm.email, _subject: `Booking Request — Pelican Point — ${bookingForm.checkin} to ${bookingForm.checkout}` }) }); }}
+            >
+              <Label>Full Name</Label>
+              <input name="name" style={inputStyle} placeholder="Your name" value={bookingForm.name} onChange={e => setBookingForm({...bookingForm, name: e.target.value})} required />
+              <Label>Email Address</Label>
+              <input name="email" type="email" style={inputStyle} placeholder="you@example.com" value={bookingForm.email} onChange={e => setBookingForm({...bookingForm, email: e.target.value})} required />
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+                <div><Label>Check-in</Label><input name="checkin" type="date" style={inputStyle} value={bookingForm.checkin} onChange={e => setBookingForm({...bookingForm, checkin: e.target.value})} required /></div>
+                <div><Label>Check-out</Label><input name="checkout" type="date" style={inputStyle} value={bookingForm.checkout} onChange={e => setBookingForm({...bookingForm, checkout: e.target.value})} required /></div>
+              </div>
+              <Label>Number of Guests</Label>
+              <select name="guests" style={inputStyle} value={bookingForm.guests} onChange={e => setBookingForm({...bookingForm, guests: e.target.value})}>
+                {["1","2","3","4","5","6"].map(n => <option key={n}>{n}</option>)}
+              </select>
+              <Label>Message (optional)</Label>
+              <textarea name="message" style={{ ...inputStyle, resize: "vertical", minHeight: 90 }} placeholder="Any special requirements or questions..." value={bookingForm.message} onChange={e => setBookingForm({...bookingForm, message: e.target.value})} />
+              <input type="hidden" name="_subject" value={`Booking Request — Pelican Point`} />
+              <input type="hidden" name="_cc" value="mark.deist@gmail.com,ndeist@gmail.com" />
+              <button type="submit" style={{ background: "#C9A84C", color: "#1A3A4A", padding: "13px 36px", border: "none", borderRadius: 3, cursor: "pointer", fontFamily: font, fontSize: "0.72rem", letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 700 }}>Send Booking Request →</button>
+            </form>
           </div>
         )}
       </div>
