@@ -166,7 +166,7 @@ export default function App() {
       <Hamburger open={menuOpen} setOpen={setMenuOpen} lightBg={false} />
       <MenuOverlay open={menuOpen} navigate={navigate} />
       <div style={{ position: "relative", width: "100%", height: "100vh", overflow: "hidden" }}>
-        <img src="/hero.png" alt="Pelican Point" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%" }} />
+        <img src="/hero.png" alt="Pelican Point" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 70%" }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.6) 100%)" }} />
         <div style={{ position: "relative", zIndex: 2, height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", padding: "0 24px 10vh", textAlign: "center" }}>
           <h1 style={{ fontSize: "clamp(3rem, 10vw, 6.5rem)", color: "#fff", fontWeight: 400, letterSpacing: "0.1em", margin: "0 0 10px", textTransform: "uppercase", lineHeight: 1 }}>Pelican Point</h1>
