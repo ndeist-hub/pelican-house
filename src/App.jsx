@@ -160,7 +160,7 @@ export default function App() {
 
         {/* ── HERO ── */}
         <div ref={el => sectionRefs.current.hero = el} style={{ width: "100%", height: "100vh", scrollSnapAlign: "start", position: "relative", overflow: "hidden", flexShrink: 0 }}>
-          <video autoPlay loop muted playsInline style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", minWidth: "100%", minHeight: "100%", width: "auto", height: "auto", objectFit: "cover" }} src="/Houseflyover2.mp4" />
+          <video autoPlay loop muted playsInline style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", minWidth: "100%", minHeight: "100%", width: "auto", height: "auto", objectFit: "cover" }} src="/Houseflyover3.mp4" />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.6) 100%)" }} />
           <div style={{ position: "relative", zIndex: 2, height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", padding: "0 24px 10vh", textAlign: "center" }}>
             <h1 style={{ fontSize: "clamp(3rem, 10vw, 6.5rem)", color: "#fff", fontWeight: 400, letterSpacing: "0.1em", margin: "0 0 10px", textTransform: "uppercase", lineHeight: 1 }}>Pelican Point</h1>
@@ -394,7 +394,7 @@ export default function App() {
               <img src="/logo.png" alt="Pelican Point" style={{ width: 32, height: 32, objectFit: "contain" }} />
               <button onClick={() => scrollTo("hero")} style={{ background: "none", border: "none", color: "#C9A84C", fontFamily: font, fontStyle: "italic", fontSize: "1rem", cursor: "pointer" }}>Pelican Point</button>
             </div>
-            <div>San Sebastian · Mozambique · <a href="mailto:hello@pelicanpointmoz.com" style={{ color: "rgba(245,240,232,0.5)", textDecoration: "none" }}>hello@pelicanpointmoz.com</a></div>
+            <div>San Sebastian · Mozambique · <a href="mailto:debbiedeist@icon.co.za" style={{ color: "rgba(245,240,232,0.5)", textDecoration: "none" }}>debbiedeist@icon.co.za</a></div>
             <div style={{ marginTop: 8 }}>© 2025 Pelican Point · <a href="https://mozsanctuary.com" target="_blank" rel="noreferrer" style={{ color: "#C9A84C", textDecoration: "none" }}>The Sanctuary</a></div>
           </footer>
         </div>
