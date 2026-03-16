@@ -52,7 +52,7 @@ const NAV_SECTIONS = [
 const font = "'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif";
 
 // Alternating section backgrounds
-const sectionBg = (i) => i % 2 === 0 ? "#E8E3D5" : "#1A3A4A";
+const sectionBg = (i) => i % 2 === 0 ? "#E0DAC8" : "#1A3A4A";
 const sectionColor = (i) => i % 2 === 0 ? "#2C2C2C" : "#F5F0E8";
 const sectionMuted = (i) => i % 2 === 0 ? "#666" : "rgba(245,240,232,0.65)";
 const goldLine = <div style={{ width: 48, height: 2, background: "#C9A84C", marginBottom: 36 }} />;
@@ -98,7 +98,7 @@ function AvailabilityCalendar() {
 // Full-screen divider image between sections
 function Divider({ src }) {
   return (
-    <div style={{ width: "100%", background: "#E8E3D5", flexShrink: 0 }}>
+    <div style={{ width: "100%", background: "#E0DAC8", flexShrink: 0 }}>
       {src && <img src={src} alt="" style={{ width: "100%", display: "block", border: "none", outline: "none" }} />}
     </div>
   );
@@ -166,7 +166,7 @@ export default function App() {
         </div>
 
         {/* ── STORY ── */}
-        <div ref={el => sectionRefs.current.story = el} style={{ width: "100%", minHeight: "100vh", background: '#E8E3D5', flexShrink: 0, display: "flex", flexDirection: "column" }}>
+        <div ref={el => sectionRefs.current.story = el} style={{ width: "100%", minHeight: "100vh", background: '#E0DAC8', flexShrink: 0, display: "flex", flexDirection: "column" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 60px 80px", flex: 1 }}>
             <p style={{ fontSize: "0.62rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "#C9A84C", marginBottom: 18 }}>The Pelican Point Story</p>
             <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 14, lineHeight: 1.25 }}>A Family, a Wilderness,<br />and a Place Called Home</h2>
@@ -194,7 +194,7 @@ export default function App() {
         <Divider src="/divider2.png" fallbackColor="#1A3A4A" />
 
         {/* ── STAY ── */}
-        <div ref={el => sectionRefs.current.stay = el} style={{ width: "100%", minHeight: "100vh", background: '#E8E3D5', flexShrink: 0 }}>
+        <div ref={el => sectionRefs.current.stay = el} style={{ width: "100%", minHeight: "100vh", background: '#E0DAC8', flexShrink: 0 }}>
           <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 60px 80px" }}>
             <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 14 }}>Stay at Pelican Point</h2>
             <div style={{ width: 48, height: 2, background: "#C9A84C", marginBottom: 36 }} />
@@ -273,7 +273,7 @@ export default function App() {
         <Divider src="/divider3.png" fallbackColor="#0D1F1A" />
 
         {/* ── GUESTBOOK ── */}
-        <div ref={el => sectionRefs.current.guestbook = el} style={{ width: "100%", minHeight: "100vh", background: '#E8E3D5', flexShrink: 0 }}>
+        <div ref={el => sectionRefs.current.guestbook = el} style={{ width: "100%", minHeight: "100vh", background: '#E0DAC8', flexShrink: 0 }}>
           <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 60px 80px" }}>
             <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 14 }}>Guestbook</h2>
             {goldLine}
@@ -314,7 +314,7 @@ export default function App() {
         <Divider src="/divider4.png" fallbackColor="#1A3A4A" />
 
         {/* ── CHECKLIST ── */}
-        <div ref={el => sectionRefs.current.checklist = el} style={{ width: "100%", minHeight: "100vh", background: '#E8E3D5', flexShrink: 0 }}>
+        <div ref={el => sectionRefs.current.checklist = el} style={{ width: "100%", minHeight: "100vh", background: '#E0DAC8', flexShrink: 0 }}>
           <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 60px 80px" }}>
             <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 14 }}>Guest Checklist</h2>
             <div style={{ width: 48, height: 2, background: "#C9A84C", marginBottom: 36 }} />
@@ -342,7 +342,7 @@ export default function App() {
         <Divider src="/divider5.png" fallbackColor="#0D1F1A" />
 
         {/* ── RECOMMENDATIONS ── */}
-        <div ref={el => sectionRefs.current.recommendations = el} style={{ width: "100%", minHeight: "100vh", background: '#E8E3D5', flexShrink: 0 }}>
+        <div ref={el => sectionRefs.current.recommendations = el} style={{ width: "100%", minHeight: "100vh", background: '#E0DAC8', flexShrink: 0 }}>
           <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 60px 80px" }}>
             <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 14 }}>Recommendations for Your Stay</h2>
             {goldLine}
@@ -366,7 +366,7 @@ export default function App() {
         <Divider src="/divider6.png" fallbackColor="#1A3A4A" />
 
         {/* ── GALLERY ── */}
-        <div ref={el => sectionRefs.current.gallery = el} style={{ width: "100%", minHeight: "100vh", background: '#E8E3D5', flexShrink: 0 }}>
+        <div ref={el => sectionRefs.current.gallery = el} style={{ width: "100%", minHeight: "100vh", background: '#E0DAC8', flexShrink: 0 }}>
           <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 60px 80px" }}>
             <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 14 }}>Gallery</h2>
             <div style={{ width: 48, height: 2, background: "#C9A84C", marginBottom: 36 }} />
