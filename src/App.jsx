@@ -98,11 +98,8 @@ function AvailabilityCalendar() {
 // Full-screen divider image between sections
 function Divider({ src }) {
   return (
-    <div style={{ width: "100%", background: "#E8E3D5", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-      {src
-        ? <img src={src} alt="" style={{ width: "100%", maxWidth: 900, display: "block", margin: "0 auto" }} />
-        : <div style={{ height: 400 }} />
-      }
+    <div style={{ width: "100%", background: "#E8E3D5", flexShrink: 0 }}>
+      {src && <img src={src} alt="" style={{ width: "100%", display: "block", border: "none", outline: "none" }} />}
     </div>
   );
 }
@@ -170,7 +167,7 @@ export default function App() {
 
         {/* ── STORY ── */}
         <div ref={el => sectionRefs.current.story = el} style={{ width: "100%", minHeight: "100vh", background: '#E8E3D5', flexShrink: 0, display: "flex", flexDirection: "column" }}>
-          <div style={{ maxWidth: 760, margin: "0 auto", padding: "100px 32px 80px", flex: 1 }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 60px 80px", flex: 1 }}>
             <p style={{ fontSize: "0.62rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "#C9A84C", marginBottom: 18 }}>The Pelican Point Story</p>
             <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 14, lineHeight: 1.25 }}>A Family, a Wilderness,<br />and a Place Called Home</h2>
             {goldLine}
@@ -198,7 +195,7 @@ export default function App() {
 
         {/* ── STAY ── */}
         <div ref={el => sectionRefs.current.stay = el} style={{ width: "100%", minHeight: "100vh", background: '#E8E3D5', flexShrink: 0 }}>
-          <div style={{ maxWidth: 860, margin: "0 auto", padding: "100px 32px 80px" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 60px 80px" }}>
             <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 14 }}>Stay at Pelican Point</h2>
             <div style={{ width: 48, height: 2, background: "#C9A84C", marginBottom: 36 }} />
             <div style={{ background: "#fff", borderRadius: 4, padding: 32, marginBottom: 24, border: "1px solid rgba(26,58,74,0.08)" }}>
@@ -277,7 +274,7 @@ export default function App() {
 
         {/* ── GUESTBOOK ── */}
         <div ref={el => sectionRefs.current.guestbook = el} style={{ width: "100%", minHeight: "100vh", background: '#E8E3D5', flexShrink: 0 }}>
-          <div style={{ maxWidth: 760, margin: "0 auto", padding: "100px 32px 80px" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 60px 80px" }}>
             <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 14 }}>Guestbook</h2>
             {goldLine}
             <p style={{ color: "#888", marginBottom: 44, fontStyle: "italic", lineHeight: 1.7 }}>Pelican Point is built on stories — the ones the land holds, and the ones our guests bring. We'd love to hear yours.</p>
@@ -318,7 +315,7 @@ export default function App() {
 
         {/* ── CHECKLIST ── */}
         <div ref={el => sectionRefs.current.checklist = el} style={{ width: "100%", minHeight: "100vh", background: '#E8E3D5', flexShrink: 0 }}>
-          <div style={{ maxWidth: 760, margin: "0 auto", padding: "100px 32px 80px" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 60px 80px" }}>
             <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 14 }}>Guest Checklist</h2>
             <div style={{ width: 48, height: 2, background: "#C9A84C", marginBottom: 36 }} />
             <p style={{ color: "#666", marginBottom: 44, fontStyle: "italic" }}>Everything you need to prepare for a seamless stay at Pelican Point.</p>
@@ -346,7 +343,7 @@ export default function App() {
 
         {/* ── RECOMMENDATIONS ── */}
         <div ref={el => sectionRefs.current.recommendations = el} style={{ width: "100%", minHeight: "100vh", background: '#E8E3D5', flexShrink: 0 }}>
-          <div style={{ maxWidth: 860, margin: "0 auto", padding: "100px 32px 80px" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 60px 80px" }}>
             <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 14 }}>Recommendations for Your Stay</h2>
             {goldLine}
             <p style={{ color: "#888", marginBottom: 44, fontStyle: "italic" }}>Our personal picks to help you make the most of San Sebastian.</p>
@@ -370,7 +367,7 @@ export default function App() {
 
         {/* ── GALLERY ── */}
         <div ref={el => sectionRefs.current.gallery = el} style={{ width: "100%", minHeight: "100vh", background: '#E8E3D5', flexShrink: 0 }}>
-          <div style={{ maxWidth: 1000, margin: "0 auto", padding: "100px 32px 80px" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 60px 80px" }}>
             <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 14 }}>Gallery</h2>
             <div style={{ width: 48, height: 2, background: "#C9A84C", marginBottom: 36 }} />
             <p style={{ color: "#777", marginBottom: 44, fontStyle: "italic" }}>Photos of Pelican Point and the wild beauty of The Sanctuary. More images coming soon.</p>
