@@ -52,7 +52,7 @@ const NAV_SECTIONS = [
 const font = "'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif";
 
 // Alternating section backgrounds
-const sectionBg = (i) => i % 2 === 0 ? "#FAFAF7" : "#1A3A4A";
+const sectionBg = (i) => i % 2 === 0 ? "#E8E3D5" : "#1A3A4A";
 const sectionColor = (i) => i % 2 === 0 ? "#2C2C2C" : "#F5F0E8";
 const sectionMuted = (i) => i % 2 === 0 ? "#666" : "rgba(245,240,232,0.65)";
 const goldLine = <div style={{ width: 48, height: 2, background: "#C9A84C", marginBottom: 36 }} />;
@@ -69,16 +69,16 @@ function AvailabilityCalendar() {
   const days = [];
   for (let i = 0; i < firstDay; i++) days.push(null);
   for (let d = 1; d <= daysInMonth; d++) days.push(new Date(year, month, d));
-  const cellStyle = (date) => { if (!date) return { background: "transparent" }; if (isPast(date)) return { background: "rgba(255,255,255,0.1)", color: "rgba(245,240,232,0.2)" }; if (isBooked(date)) return { background: "#C9A84C", color: "#1A3A4A", fontWeight: 600 }; return { background: "rgba(255,255,255,0.12)", color: "#F5F0E8" }; };
+  const cellStyle = (date) => { if (!date) return { background: "transparent" }; if (isPast(date)) return { background: "rgba(255,255,255,0.1)", color: "#bbb" }; if (isBooked(date)) return { background: "#C9A84C", color: "#1A3A4A", fontWeight: 600 }; return { background: "rgba(26,58,74,0.08)", color: "#1A3A4A" }; };
   return (
-    <div style={{ background: "rgba(255,255,255,0.06)", borderRadius: 4, padding: 24, border: "1px solid rgba(255,255,255,0.1)", marginBottom: 36 }}>
+    <div style={{ background: "#fff", borderRadius: 4, padding: 24, border: "1px solid rgba(26,58,74,0.1)", marginBottom: 36 }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
-        <button onClick={() => setViewDate(new Date(year, month - 1, 1))} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#F5F0E8", padding: "4px 10px" }}>‹</button>
-        <span style={{ fontFamily: font, fontStyle: "italic", color: "#F5F0E8", fontSize: "0.95rem" }}>{monthName}</span>
-        <button onClick={() => setViewDate(new Date(year, month + 1, 1))} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#F5F0E8", padding: "4px 10px" }}>›</button>
+        <button onClick={() => setViewDate(new Date(year, month - 1, 1))} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#1A3A4A", padding: "4px 10px" }}>‹</button>
+        <span style={{ fontFamily: font, fontStyle: "italic", color: "#1A3A4A", fontSize: "0.95rem" }}>{monthName}</span>
+        <button onClick={() => setViewDate(new Date(year, month + 1, 1))} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#1A3A4A", padding: "4px 10px" }}>›</button>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 3, marginBottom: 6 }}>
-        {["Su","Mo","Tu","We","Th","Fr","Sa"].map(d => <div key={d} style={{ textAlign: "center", fontSize: "0.58rem", letterSpacing: "0.1em", color: "rgba(245,240,232,0.4)", textTransform: "uppercase" }}>{d}</div>)}
+        {["Su","Mo","Tu","We","Th","Fr","Sa"].map(d => <div key={d} style={{ textAlign: "center", fontSize: "0.58rem", letterSpacing: "0.1em", color: "#aaa", textTransform: "uppercase" }}>{d}</div>)}
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 3 }}>
         {days.map((date, i) => <div key={i} style={{ textAlign: "center", padding: "7px 2px", borderRadius: 2, fontSize: "0.8rem", ...cellStyle(date) }}>{date ? date.getDate() : ""}</div>)}
@@ -96,14 +96,13 @@ function AvailabilityCalendar() {
 }
 
 // Full-screen divider image between sections
-function Divider({ src, fallbackColor = "#1A3A4A" }) {
+function Divider({ src }) {
   return (
-    <div style={{ width: "100%", height: "100vh", position: "relative", overflow: "hidden", flexShrink: 0 }}>
+    <div style={{ width: "100%", background: "#E8E3D5", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
       {src
-        ? <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
-        : <div style={{ width: "100%", height: "100%", background: fallbackColor }} />
+        ? <img src={src} alt="" style={{ width: "100%", maxWidth: 900, display: "block", margin: "0 auto" }} />
+        : <div style={{ height: 400 }} />
       }
-      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.15))" }} />
     </div>
   );
 }
@@ -132,7 +131,7 @@ export default function App() {
 
   useEffect(() => { document.body.style.overflow = (menuOpen || lightbox !== null) ? "hidden" : ""; return () => { document.body.style.overflow = ""; }; }, [menuOpen, lightbox]);
 
-  const inputStyle = { width: "100%", padding: "11px 14px", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 2, fontFamily: font, fontSize: "0.95rem", color: "#F5F0E8", background: "rgba(255,255,255,0.07)", boxSizing: "border-box", marginBottom: 16, outline: "none" };
+  const inputStyle = { width: "100%", padding: "11px 14px", border: "1px solid #ddd", borderRadius: 2, fontFamily: font, fontSize: "0.95rem", color: "#1A3A4A", background: "#fff", boxSizing: "border-box", marginBottom: 16, outline: "none" };
   const inputStyleLight = { width: "100%", padding: "11px 14px", border: "1px solid #ddd", borderRadius: 2, fontFamily: font, fontSize: "0.95rem", color: "#2C2C2C", background: "#fff", boxSizing: "border-box", marginBottom: 16, outline: "none" };
   const Label = ({ children, dark }) => <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.15em", textTransform: "uppercase", color: dark ? "#888" : "rgba(245,240,232,0.5)", marginBottom: 6 }}>{children}</label>;
 
@@ -149,7 +148,7 @@ export default function App() {
       <div style={{ position: "fixed", inset: 0, background: "rgba(13,31,26,0.97)", zIndex: 999, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", opacity: menuOpen ? 1 : 0, pointerEvents: menuOpen ? "all" : "none", transition: "opacity 0.35s ease", fontFamily: font, padding: "0 24px" }}>
         {NAV_SECTIONS.map((item, i) => (
           <div key={item.id} style={{ textAlign: "center" }}>
-            <button onClick={() => scrollTo(item.id)} style={{ background: "none", border: "none", color: "#F5F0E8", fontFamily: font, fontSize: "clamp(1.1rem, 3vw, 1.9rem)", fontWeight: 400, letterSpacing: "0.08em", textTransform: "uppercase", cursor: "pointer", padding: "9px 0", display: "block" }}>{item.label}</button>
+            <button onClick={() => scrollTo(item.id)} style={{ background: "none", border: "none", color: "#1A3A4A", fontFamily: font, fontSize: "clamp(1.1rem, 3vw, 1.9rem)", fontWeight: 400, letterSpacing: "0.08em", textTransform: "uppercase", cursor: "pointer", padding: "9px 0", display: "block" }}>{item.label}</button>
             {i < NAV_SECTIONS.length - 1 && <div style={{ width: 1, height: 14, background: "rgba(201,168,76,0.3)", margin: "0 auto" }} />}
           </div>
         ))}
@@ -170,7 +169,7 @@ export default function App() {
         </div>
 
         {/* ── STORY ── */}
-        <div ref={el => sectionRefs.current.story = el} style={{ width: "100%", minHeight: "100vh", background: sectionBg(0), flexShrink: 0, display: "flex", flexDirection: "column" }}>
+        <div ref={el => sectionRefs.current.story = el} style={{ width: "100%", minHeight: "100vh", background: '#E8E3D5', flexShrink: 0, display: "flex", flexDirection: "column" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", padding: "100px 32px 80px", flex: 1 }}>
             <p style={{ fontSize: "0.62rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "#C9A84C", marginBottom: 18 }}>The Pelican Point Story</p>
             <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 14, lineHeight: 1.25 }}>A Family, a Wilderness,<br />and a Place Called Home</h2>
@@ -198,30 +197,30 @@ export default function App() {
         <Divider src="/divider2.png" fallbackColor="#1A3A4A" />
 
         {/* ── STAY ── */}
-        <div ref={el => sectionRefs.current.stay = el} style={{ width: "100%", minHeight: "100vh", background: sectionBg(1), flexShrink: 0 }}>
+        <div ref={el => sectionRefs.current.stay = el} style={{ width: "100%", minHeight: "100vh", background: '#E8E3D5', flexShrink: 0 }}>
           <div style={{ maxWidth: 860, margin: "0 auto", padding: "100px 32px 80px" }}>
-            <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 14 }}>Stay at Pelican Point</h2>
+            <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 14 }}>Stay at Pelican Point</h2>
             <div style={{ width: 48, height: 2, background: "#C9A84C", marginBottom: 36 }} />
-            <div style={{ background: "rgba(255,255,255,0.06)", borderRadius: 4, padding: 32, marginBottom: 24, border: "1px solid rgba(255,255,255,0.08)" }}>
-              <p style={{ lineHeight: 1.95, color: "rgba(245,240,232,0.75)", fontSize: "1.02rem", fontStyle: "italic", marginBottom: 18 }}>Pelican Point is a thoughtfully curated retreat within The Sanctuary — a 30,000 hectare conservation reserve on Mozambique's wild San Sebastian peninsula.</p>
-              <p style={{ lineHeight: 1.9, color: "rgba(245,240,232,0.6)", fontSize: "0.95rem", marginBottom: 0 }}>The house sleeps up to 6 guests and is fully equipped with a modern kitchen, outdoor dining terrace, high-speed Wi-Fi, and a curated library of local field guides.</p>
+            <div style={{ background: "#fff", borderRadius: 4, padding: 32, marginBottom: 24, border: "1px solid rgba(26,58,74,0.08)" }}>
+              <p style={{ lineHeight: 1.95, color: "#555", fontSize: "1.02rem", fontStyle: "italic", marginBottom: 18 }}>Pelican Point is a thoughtfully curated retreat within The Sanctuary — a 30,000 hectare conservation reserve on Mozambique's wild San Sebastian peninsula.</p>
+              <p style={{ lineHeight: 1.9, color: "#666", fontSize: "0.95rem", marginBottom: 0 }}>The house sleeps up to 6 guests and is fully equipped with a modern kitchen, outdoor dining terrace, high-speed Wi-Fi, and a curated library of local field guides.</p>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: 10, marginBottom: 52 }}>
               {[["🛏️","6 En Suite Bedrooms"],["👨‍🍳","4 Full-Time Staff incl. Chef & Skipper"],["⛵","Boat"],["🏊","Swimming Pool"],["🚙","Game Vehicle"],["🌊","Hobie Cat · SUP Boards · Canoes"],["🤿","Snorkelling Gear"],["🦟","Mosquito Nets in All Rooms"],["📶","Fast Wi-Fi"],["🚭","No Smoking"]].map(([icon, label]) => (
-                <div key={label} style={{ textAlign: "center", padding: "20px 10px", background: "rgba(255,255,255,0.05)", borderRadius: 3, border: "1px solid rgba(255,255,255,0.08)" }}>
+                <div key={label} style={{ textAlign: "center", padding: "20px 10px", background: "#fff", borderRadius: 3, border: "1px solid rgba(26,58,74,0.08)" }}>
                   <div style={{ fontSize: 24, marginBottom: 8 }}>{icon}</div>
-                  <div style={{ fontSize: "0.62rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(245,240,232,0.55)", lineHeight: 1.4 }}>{label}</div>
+                  <div style={{ fontSize: "0.62rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#777", lineHeight: 1.4 }}>{label}</div>
                 </div>
               ))}
             </div>
 
             {/* Staff */}
             <p style={{ fontSize: "0.62rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "#C9A84C", marginBottom: 16 }}>Meet Your Team</p>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 28 }}>Four dedicated staff to make your stay exceptional.</h3>
+            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 28 }}>Four dedicated staff to make your stay exceptional.</h3>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16, marginBottom: 60 }}>
               {STAFF.map(member => (
-                <div key={member.name} style={{ background: "rgba(255,255,255,0.05)", borderRadius: 4, overflow: "hidden", border: "1px solid rgba(255,255,255,0.08)" }}>
-                  <div style={{ width: "100%", aspectRatio: "1/1", background: "rgba(255,255,255,0.05)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+                <div key={member.name} style={{ background: "#fff", borderRadius: 4, overflow: "hidden", border: "1px solid rgba(26,58,74,0.08)" }}>
+                  <div style={{ width: "100%", aspectRatio: "1/1", background: "#fff", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
                     {member.photo ? <img src={member.photo} alt={member.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : <>
                       <div style={{ fontSize: 36, opacity: 0.15, marginBottom: 6 }}>👤</div>
                       <p style={{ color: "rgba(255,255,255,0.2)", fontSize: "0.58rem", letterSpacing: "0.15em", textTransform: "uppercase", margin: 0 }}>Photo coming soon</p>
@@ -229,8 +228,8 @@ export default function App() {
                   </div>
                   <div style={{ padding: "18px 18px 22px" }}>
                     <p style={{ fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C9A84C", margin: "0 0 4px" }}>{member.role}</p>
-                    <h4 style={{ fontSize: "1rem", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", margin: "0 0 10px" }}>{member.name}</h4>
-                    <p style={{ fontSize: "0.82rem", color: "rgba(245,240,232,0.55)", lineHeight: 1.75, margin: 0 }}>{member.bio}</p>
+                    <h4 style={{ fontSize: "1rem", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", margin: "0 0 10px" }}>{member.name}</h4>
+                    <p style={{ fontSize: "0.82rem", color: "#777", lineHeight: 1.75, margin: 0 }}>{member.bio}</p>
                   </div>
                 </div>
               ))}
@@ -238,10 +237,10 @@ export default function App() {
 
             {/* Booking */}
             <p style={{ fontSize: "0.62rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "#C9A84C", marginBottom: 16 }}>Availability</p>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 28 }}>Check available dates below.</h3>
+            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 28 }}>Check available dates below.</h3>
             <AvailabilityCalendar />
             <p style={{ fontSize: "0.62rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "#C9A84C", marginBottom: 16 }}>Request a Booking</p>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 28 }}>We'll confirm availability and pricing within 24 hours.</h3>
+            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 28 }}>We'll confirm availability and pricing within 24 hours.</h3>
             {bookingSubmitted ? (
               <div style={{ background: "rgba(201,168,76,0.15)", border: "1px solid rgba(201,168,76,0.3)", borderRadius: 4, padding: 36, textAlign: "center", color: "#C9A84C" }}>
                 <div style={{ fontSize: 40, marginBottom: 12 }}>✉️</div>
@@ -249,7 +248,7 @@ export default function App() {
                 <p style={{ margin: 0, color: "rgba(201,168,76,0.8)" }}>Thank you, <strong>{bookingForm.name}</strong>. We'll be in touch at <strong>{bookingForm.email}</strong> within 24 hours.</p>
               </div>
             ) : (
-              <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 4, padding: 32, border: "1px solid rgba(255,255,255,0.08)" }}>
+              <div style={{ background: "#fff", borderRadius: 4, padding: 32, border: "1px solid rgba(26,58,74,0.08)" }}>
                 <form action="https://formspree.io/f/xqeylopw" method="POST" onSubmit={(e) => { e.preventDefault(); handleBooking(); fetch("https://formspree.io/f/xqeylopw", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: bookingForm.name, email: bookingForm.email, checkin: bookingForm.checkin, checkout: bookingForm.checkout, guests: bookingForm.guests, message: bookingForm.message, _subject: `Booking Request — Pelican Point — ${bookingForm.checkin} to ${bookingForm.checkout}` }) }); }}>
                   <Label>Full Name</Label>
                   <input name="name" style={inputStyle} placeholder="Your name" value={bookingForm.name} onChange={e => setBookingForm({...bookingForm, name: e.target.value})} required />
@@ -277,7 +276,7 @@ export default function App() {
         <Divider src="/divider3.png" fallbackColor="#0D1F1A" />
 
         {/* ── GUESTBOOK ── */}
-        <div ref={el => sectionRefs.current.guestbook = el} style={{ width: "100%", minHeight: "100vh", background: sectionBg(0), flexShrink: 0 }}>
+        <div ref={el => sectionRefs.current.guestbook = el} style={{ width: "100%", minHeight: "100vh", background: '#E8E3D5', flexShrink: 0 }}>
           <div style={{ maxWidth: 760, margin: "0 auto", padding: "100px 32px 80px" }}>
             <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 14 }}>Guestbook</h2>
             {goldLine}
@@ -318,22 +317,22 @@ export default function App() {
         <Divider src="/divider4.png" fallbackColor="#1A3A4A" />
 
         {/* ── CHECKLIST ── */}
-        <div ref={el => sectionRefs.current.checklist = el} style={{ width: "100%", minHeight: "100vh", background: sectionBg(1), flexShrink: 0 }}>
+        <div ref={el => sectionRefs.current.checklist = el} style={{ width: "100%", minHeight: "100vh", background: '#E8E3D5', flexShrink: 0 }}>
           <div style={{ maxWidth: 760, margin: "0 auto", padding: "100px 32px 80px" }}>
-            <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 14 }}>Guest Checklist</h2>
+            <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 14 }}>Guest Checklist</h2>
             <div style={{ width: 48, height: 2, background: "#C9A84C", marginBottom: 36 }} />
-            <p style={{ color: "rgba(245,240,232,0.6)", marginBottom: 44, fontStyle: "italic" }}>Everything you need to prepare for a seamless stay at Pelican Point.</p>
+            <p style={{ color: "#666", marginBottom: 44, fontStyle: "italic" }}>Everything you need to prepare for a seamless stay at Pelican Point.</p>
             {CHECKLIST.map(group => (
               <div key={group.group} style={{ marginBottom: 36 }}>
-                <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "#C9A84C", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 12, paddingBottom: 8, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>{group.group}</div>
+                <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "#C9A84C", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 12, paddingBottom: 8, borderBottom: "1px solid rgba(26,58,74,0.08)" }}>{group.group}</div>
                 {group.items.map(item => {
                   const k = group.group + item; const isChecked = !!checked[k];
                   return (
-                    <div key={item} onClick={() => toggleCheck(k)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "12px 0", borderBottom: "1px solid rgba(255,255,255,0.05)", cursor: "pointer", opacity: isChecked ? 0.4 : 1, transition: "opacity 0.2s" }}>
+                    <div key={item} onClick={() => toggleCheck(k)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "12px 0", borderBottom: "1px solid #eee", cursor: "pointer", opacity: isChecked ? 0.4 : 1, transition: "opacity 0.2s" }}>
                       <div style={{ width: 20, height: 20, borderRadius: 2, border: isChecked ? "none" : "1px solid rgba(201,168,76,0.6)", background: isChecked ? "#C9A84C" : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all 0.2s" }}>
                         {isChecked && <span style={{ color: "#1A3A4A", fontSize: 11, fontWeight: 700 }}>✓</span>}
                       </div>
-                      <span style={{ color: "rgba(245,240,232,0.7)", fontSize: "0.95rem", textDecoration: isChecked ? "line-through" : "none" }}>{item}</span>
+                      <span style={{ color: "#555", fontSize: "0.95rem", textDecoration: isChecked ? "line-through" : "none" }}>{item}</span>
                     </div>
                   );
                 })}
@@ -346,7 +345,7 @@ export default function App() {
         <Divider src="/divider5.png" fallbackColor="#0D1F1A" />
 
         {/* ── RECOMMENDATIONS ── */}
-        <div ref={el => sectionRefs.current.recommendations = el} style={{ width: "100%", minHeight: "100vh", background: sectionBg(0), flexShrink: 0 }}>
+        <div ref={el => sectionRefs.current.recommendations = el} style={{ width: "100%", minHeight: "100vh", background: '#E8E3D5', flexShrink: 0 }}>
           <div style={{ maxWidth: 860, margin: "0 auto", padding: "100px 32px 80px" }}>
             <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 14 }}>Recommendations for Your Stay</h2>
             {goldLine}
@@ -370,11 +369,11 @@ export default function App() {
         <Divider src="/divider6.png" fallbackColor="#1A3A4A" />
 
         {/* ── GALLERY ── */}
-        <div ref={el => sectionRefs.current.gallery = el} style={{ width: "100%", minHeight: "100vh", background: sectionBg(1), flexShrink: 0 }}>
+        <div ref={el => sectionRefs.current.gallery = el} style={{ width: "100%", minHeight: "100vh", background: '#E8E3D5', flexShrink: 0 }}>
           <div style={{ maxWidth: 1000, margin: "0 auto", padding: "100px 32px 80px" }}>
-            <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 14 }}>Gallery</h2>
+            <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 14 }}>Gallery</h2>
             <div style={{ width: 48, height: 2, background: "#C9A84C", marginBottom: 36 }} />
-            <p style={{ color: "rgba(245,240,232,0.55)", marginBottom: 44, fontStyle: "italic" }}>Photos of Pelican Point and the wild beauty of The Sanctuary. More images coming soon.</p>
+            <p style={{ color: "#777", marginBottom: 44, fontStyle: "italic" }}>Photos of Pelican Point and the wild beauty of The Sanctuary. More images coming soon.</p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 10 }}>
               {GALLERY_PLACEHOLDERS.map((item, i) => (
                 <div key={i} onClick={() => setLightbox(i)} style={{ aspectRatio: "4/3", background: item.color, borderRadius: 2, cursor: "pointer", display: "flex", alignItems: "flex-end", overflow: "hidden", position: "relative" }}>
@@ -389,7 +388,7 @@ export default function App() {
           </div>
 
           {/* Footer */}
-          <footer style={{ background: "#0D1F1A", color: "rgba(245,240,232,0.35)", textAlign: "center", padding: "36px 24px", fontSize: "0.72rem", letterSpacing: "0.1em", fontFamily: font }}>
+          <footer style={{ background: "#1A3A4A", color: "rgba(245,240,232,0.35)", textAlign: "center", padding: "36px 24px", fontSize: "0.72rem", letterSpacing: "0.1em", fontFamily: font }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginBottom: 8 }}>
               <img src="/logo.png" alt="Pelican Point" style={{ width: 32, height: 32, objectFit: "contain" }} />
               <button onClick={() => scrollTo("hero")} style={{ background: "none", border: "none", color: "#C9A84C", fontFamily: font, fontStyle: "italic", fontSize: "1rem", cursor: "pointer" }}>Pelican Point</button>
