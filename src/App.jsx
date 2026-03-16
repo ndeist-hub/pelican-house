@@ -159,8 +159,8 @@ export default function App() {
       <div ref={containerRef} style={{ height: "100vh", overflowY: "scroll", scrollSnapType: "y mandatory" }}>
 
         {/* ── HERO ── */}
-        <div ref={el => sectionRefs.current.hero = el} style={{ width: "100%", height: "100vh", scrollSnapAlign: "start", position: "relative", flexShrink: 0 }}>
-          <video autoPlay loop muted playsInline style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} src="/Houseflyover2.mp4" />
+        <div ref={el => sectionRefs.current.hero = el} style={{ width: "100%", height: "100vh", scrollSnapAlign: "start", position: "relative", overflow: "hidden", flexShrink: 0 }}>
+          <video autoPlay loop muted playsInline style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", minWidth: "100%", minHeight: "100%" }} src="/Houseflyover2.mp4" />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.6) 100%)" }} />
           <div style={{ position: "relative", zIndex: 2, height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", padding: "0 24px 10vh", textAlign: "center" }}>
             <h1 style={{ fontSize: "clamp(3rem, 10vw, 6.5rem)", color: "#fff", fontWeight: 400, letterSpacing: "0.1em", margin: "0 0 10px", textTransform: "uppercase", lineHeight: 1 }}>Pelican Point</h1>
