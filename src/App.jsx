@@ -79,14 +79,14 @@ function AvailabilityCalendar() {
   for (let d = 1; d <= daysInMonth; d++) days.push(new Date(year, month, d));
   const cellStyle = (date) => { if (!date) return { background: "transparent" }; if (isPast(date)) return { background: "#f5f5f5", color: "#ccc" }; if (isBooked(date)) return { background: "#1A3A4A", color: "#fff", fontWeight: 600 }; return { background: "#EDF7F0", color: "#1A5C30" }; };
   return (
-    <div style={{ background: "#1A3A4A", borderRadius: 4, padding: 24, border: "1px solid rgba(255,255,255,0.08)", marginBottom: 36 }}>
+    <div style={{ background: "#fff", borderRadius: 4, padding: 24, border: "1px solid rgba(26,58,74,0.1)", marginBottom: 36 }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
         <button onClick={() => setViewDate(new Date(year, month - 1, 1))} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#1A3A4A", padding: "4px 10px" }}>‹</button>
         <span style={{ fontFamily: font, fontStyle: "italic", color: "#1A3A4A", fontSize: "0.95rem" }}>{monthName}</span>
         <button onClick={() => setViewDate(new Date(year, month + 1, 1))} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#1A3A4A", padding: "4px 10px" }}>›</button>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 3, marginBottom: 6 }}>
-        {["Su","Mo","Tu","We","Th","Fr","Sa"].map(d => <div key={d} style={{ textAlign: "center", fontSize: "0.58rem", letterSpacing: "0.1em", color: "rgba(245,240,232,0.4)", textTransform: "uppercase" }}>{d}</div>)}
+        {["Su","Mo","Tu","We","Th","Fr","Sa"].map(d => <div key={d} style={{ textAlign: "center", fontSize: "0.58rem", letterSpacing: "0.1em", color: "#888", textTransform: "uppercase" }}>{d}</div>)}
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 3 }}>
         {days.map((date, i) => <div key={i} style={{ textAlign: "center", padding: "7px 2px", borderRadius: 2, fontSize: "0.8rem", ...cellStyle(date) }}>{date ? date.getDate() : ""}</div>)}
@@ -95,7 +95,7 @@ function AvailabilityCalendar() {
         {[["#EDF7F0","#A8D4B8","Available"],["#1A3A4A",null,"Booked"],["#f5f5f5","#eee","Past"]].map(([bg, border, label]) => (
           <div key={label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
             <div style={{ width: 12, height: 12, borderRadius: 2, background: bg, border: border ? `1px solid ${border}` : "none" }} />
-            <span style={{ fontSize: "0.68rem", color: "rgba(245,240,232,0.5)" }}>{label}</span>
+            <span style={{ fontSize: "0.68rem", color: "#666" }}>{label}</span>
           </div>
         ))}
       </div>
@@ -103,10 +103,11 @@ function AvailabilityCalendar() {
   );
 }
 
-function Divider({ src }) {
+function Divider() {
   return (
-    <div style={{ width: "100%", background: "#1A3A4A", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-      {src ? <img src={src} alt="" style={{ width: "100%", maxWidth: 900, display: "block", margin: "0 auto" }} /> : <div style={{ height: 200 }} />}
+    <div style={{ width: "100%", height: "60vh", background: "#0D1F2A", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 12 }}>
+      <div style={{ fontSize: 36, opacity: 0.2 }}>▶</div>
+      <p style={{ color: "rgba(255,255,255,0.2)", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", margin: 0 }}>Video coming soon</p>
     </div>
   );
 }
@@ -130,13 +131,13 @@ export default function App() {
 
   useEffect(() => { document.body.style.overflow = (menuOpen || lightbox !== null) ? "hidden" : ""; return () => { document.body.style.overflow = ""; }; }, [menuOpen, lightbox]);
 
-  const inputStyle = { width: "100%", padding: "11px 14px", border: "1px solid rgba(255,255,255,0.2)", borderRadius: 2, fontFamily: font, fontSize: "0.95rem", color: "#F5F0E8", background: "rgba(255,255,255,0.07)", boxSizing: "border-box", marginBottom: 16, outline: "none" };
-  const Label = ({ children }) => <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(245,240,232,0.5)", marginBottom: 6 }}>{children}</label>;
+  const inputStyle = { width: "100%", padding: "11px 14px", border: "1px solid #ddd", borderRadius: 2, fontFamily: font, fontSize: "0.95rem", color: "#2C2C2C", background: "#FAFAF7", boxSizing: "border-box", marginBottom: 16, outline: "none" };
+  const Label = ({ children }) => <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#888", marginBottom: 6 }}>{children}</label>;
 
-  const prose = { lineHeight: 1.95, color: "rgba(245,240,232,0.75)", fontSize: "1rem", marginBottom: 20 };
+  const prose = { lineHeight: 1.95, color: "#444", fontSize: "1rem", marginBottom: 20 };
   const sectionHead = { fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 14 };
   const subHead = { fontSize: "0.62rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "#C9A84C", marginBottom: 16 };
-  const cardStyle = { background: "rgba(255,255,255,0.05)", borderRadius: 4, padding: 28, border: "1px solid rgba(255,255,255,0.1)", boxShadow: "0 2px 12px rgba(0,0,0,0.1)" };
+  const cardStyle = { background: "#fff", borderRadius: 4, padding: 28, border: "1px solid rgba(26,58,74,0.08)", boxShadow: "0 2px 16px rgba(0,0,0,0.08)" };
 
   return (
     <div style={{ fontFamily: font, background: "#1A3A4A" }}>
@@ -178,7 +179,7 @@ export default function App() {
               {/* Photo + name — floated left, text wraps around and below */}
               <div style={{ float: "left", width: 320, marginRight: 64, marginBottom: 32 }}>
                 <div style={{ width: "100%", aspectRatio: "3/4", background: "rgba(255,255,255,0.05)", borderRadius: 2, overflow: "hidden" }}>
-                  <img src="/debbie.jpg" alt="Debbie Deist" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
+                  <img src="/debbie.jpeg" alt="Debbie Deist" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
                     onError={e => { e.target.style.display = "none"; e.target.nextSibling.style.display = "flex"; }} />
                   <div style={{ display: "none", width: "100%", height: "100%", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 12 }}>
                     <div style={{ fontSize: 48, opacity: 0.15 }}>👤</div>
@@ -203,7 +204,7 @@ export default function App() {
         </div>
 
         {/* ── DIVIDER 2 ── */}
-        <Divider src="/divider2.png" />
+        <Divider />
 
         {/* ── STAY ── */}
         <div ref={el => sectionRefs.current.stay = el} style={{ width: "100%", background: "#1A3A4A" }}>
@@ -220,22 +221,22 @@ export default function App() {
               <p style={prose}>As part of your stay, you will have access to our boat, which will be driven only by our skipper or Juvencio. The boat will ferry you to and from Vilankulos as required and serve as your primary mode of transport in the Archipelago. The boat can be made available for deep-sea fishing upon request and at an additional charge.</p>
               <p style={prose}>You will have access to our SUPs and kayaks, and we encourage you to bring your own snorkelling gear. The Hobie Cat will be available only upon request and for an additional fee, subject to strict safety rules.</p>
               <p style={prose}>We have a game vehicle that you will have access to, to explore the Sanctuary's interior, and this must be driven by Juvencio.</p>
-              <p style={{ ...prose, marginBottom: 0, color: "#1A3A4A", fontWeight: 500 }}>As general policy, we allow no glass in the pool, and smoking and recreational drug use are strictly forbidden on the premises. Any issues regarding your stay whilst on site should be directed to Juvencio and can then be escalated appropriately to Debbie Deist.</p>
+              <p style={{ ...prose, marginBottom: 0, color: "#444", fontWeight: 500 }}>As general policy, we allow no glass in the pool, and smoking and recreational drug use are strictly forbidden on the premises. Any issues regarding your stay whilst on site should be directed to Juvencio and can then be escalated appropriately to Debbie Deist.</p>
             </div>
 
             {/* Amenity icons */}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: 10, marginBottom: 60 }}>
               {[["🛏️","6 En Suite Bedrooms"],["👨‍🍳","4 Full-Time Staff incl. Chef & Skipper"],["⛵","Boat"],["🏊","Swimming Pool"],["🚙","Game Vehicle"],["🌊","Hobie Cat · SUP Boards · Canoes"],["🤿","Snorkelling Gear"],["🦟","Mosquito Nets in All Rooms"],["📶","Fast Wi-Fi"],["🚭","No Smoking & No Drugs"]].map(([icon, label]) => (
-                <div key={label} style={{ textAlign: "center", padding: "20px 10px", background: "rgba(255,255,255,0.05)", borderRadius: 3, border: "1px solid rgba(255,255,255,0.08)" }}>
+                <div key={label} style={{ textAlign: "center", padding: "20px 10px", background: "#fff", borderRadius: 3, border: "1px solid rgba(26,58,74,0.08)" }}>
                   <div style={{ fontSize: 24, marginBottom: 8 }}>{icon}</div>
-                  <div style={{ fontSize: "0.62rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(245,240,232,0.55)", lineHeight: 1.4 }}>{label}</div>
+                  <div style={{ fontSize: "0.62rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#555", lineHeight: 1.4 }}>{label}</div>
                 </div>
               ))}
             </div>
 
             {/* Rooms */}
             <p style={subHead}>The Rooms</p>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 28 }}>Each room opens onto a different aspect of the surrounding ecosystem.</h3>
+            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 28 }}>Each room opens onto a different aspect of the surrounding ecosystem.</h3>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20, marginBottom: 60 }}>
               {ROOMS.map((room, i) => (
                 <div key={i} style={{ ...cardStyle, padding: 0, overflow: "hidden" }}>
@@ -250,7 +251,7 @@ export default function App() {
                   </div>
                   <div style={{ padding: "20px 24px 24px" }}>
                     <p style={{ fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C9A84C", margin: "0 0 6px" }}>Bedroom {i + 1}</p>
-                    <h4 style={{ fontSize: "1rem", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", margin: "0 0 10px" }}>{room.name}</h4>
+                    <h4 style={{ fontSize: "1rem", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", margin: "0 0 10px" }}>{room.name}</h4>
                     <p style={{ fontSize: "0.85rem", color: "rgba(245,240,232,0.65)", lineHeight: 1.75, margin: 0 }}>{room.description}</p>
                   </div>
                 </div>
@@ -259,7 +260,7 @@ export default function App() {
 
             {/* Staff */}
             <p style={subHead}>Meet Your Team</p>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 28 }}>Four dedicated staff to make your stay exceptional.</h3>
+            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 28 }}>Four dedicated staff to make your stay exceptional.</h3>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20, marginBottom: 60 }}>
               {STAFF.map(member => (
                 <div key={member.name} style={{ ...cardStyle, padding: 0, overflow: "hidden" }}>
@@ -271,8 +272,8 @@ export default function App() {
                   </div>
                   <div style={{ padding: "18px 20px 22px" }}>
                     <p style={{ fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C9A84C", margin: "0 0 4px" }}>{member.role}</p>
-                    <h4 style={{ fontSize: "1rem", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", margin: "0 0 10px" }}>{member.name}</h4>
-                    <p style={{ fontSize: "0.82rem", color: "rgba(245,240,232,0.65)", lineHeight: 1.75, margin: 0 }}>{member.bio}</p>
+                    <h4 style={{ fontSize: "1rem", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", margin: "0 0 10px" }}>{member.name}</h4>
+                    <p style={{ fontSize: "0.82rem", color: "#333", lineHeight: 1.75, margin: 0 }}>{member.bio}</p>
                   </div>
                 </div>
               ))}
@@ -280,10 +281,10 @@ export default function App() {
 
             {/* Availability & Booking */}
             <p style={subHead}>Availability</p>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 28 }}>Check available dates below.</h3>
+            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 28 }}>Check available dates below.</h3>
             <AvailabilityCalendar />
             <p style={subHead}>Request a Booking</p>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", marginBottom: 28 }}>We'll confirm availability and pricing within 24 hours.</h3>
+            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 28 }}>We'll confirm availability and pricing within 24 hours.</h3>
             {bookingSubmitted ? (
               <div style={{ background: "#EDF7F0", border: "1px solid #A8D4B8", borderRadius: 4, padding: 36, textAlign: "center", color: "#1A5C30" }}>
                 <div style={{ fontSize: 40, marginBottom: 12 }}>✉️</div>
@@ -315,8 +316,6 @@ export default function App() {
           </div>
         </div>
 
-        {/* ── DIVIDER 3 ── */}
-        <Divider src="/divider3.png" />
 
         {/* ── GUESTBOOK ── */}
         <div ref={el => sectionRefs.current.guestbook = el} style={{ width: "100%", background: "#1A3A4A" }}>
@@ -325,7 +324,7 @@ export default function App() {
             {goldLine}
             <p style={{ color: "rgba(245,240,232,0.65)", marginBottom: 44, fontStyle: "italic", lineHeight: 1.7 }}>Pelican Point is built on stories — the ones the land holds, and the ones our guests bring. We'd love to hear yours.</p>
             {!guestbookSubmitted ? (
-              <div style={{ ...cardStyle, marginBottom: 48, borderTop: "3px solid #C9A84C" }}>
+              <div style={{ background: "#fff", borderRadius: 4, padding: 28, border: "1px solid rgba(26,58,74,0.08)", boxShadow: "0 2px 16px rgba(0,0,0,0.08)", marginBottom: 48, borderTop: "3px solid #C9A84C" }}>
                 <Label>Your Name</Label>
                 <input style={inputStyle} placeholder="Name" value={guestbookForm.name} onChange={e => setGuestbookForm({...guestbookForm, name: e.target.value})} />
                 <Label>When did you stay?</Label>
@@ -336,7 +335,7 @@ export default function App() {
                 </div>
                 <Label>Your Message</Label>
                 <textarea style={{ ...inputStyle, resize: "vertical", minHeight: 100 }} placeholder="Share your experience at Pelican Point..." value={guestbookForm.text} onChange={e => setGuestbookForm({...guestbookForm, text: e.target.value})} />
-                <button onClick={handleGuestbook} style={{ background: "#1A3A4A", color: "#fff", padding: "13px 32px", border: "none", borderRadius: 2, cursor: "pointer", fontFamily: font, fontSize: "0.72rem", letterSpacing: "0.15em", textTransform: "uppercase" }}>Add to Guestbook →</button>
+                <button onClick={handleGuestbook} style={{ background: "#C9A84C", color: "#1A3A4A", padding: "13px 32px", border: "none", borderRadius: 2, cursor: "pointer", fontFamily: font, fontSize: "0.72rem", letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 700 }}>Add to Guestbook →</button>
               </div>
             ) : (
               <div style={{ background: "#EDF7F0", border: "1px solid #A8D4B8", borderRadius: 4, padding: 28, textAlign: "center", color: "#1A5C30", marginBottom: 48 }}>
@@ -346,7 +345,7 @@ export default function App() {
             {reviews.length > 0 ? reviews.map((r, i) => (
               <div key={i} style={{ borderLeft: "3px solid #C9A84C", paddingLeft: 20, marginBottom: 32 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
-                  <span style={{ fontWeight: 600, color: "#1A3A4A" }}>{r.name}</span>
+                  <span style={{ fontWeight: 600, color: "#F5F0E8" }}>{r.name}</span>
                   <span style={{ color: "rgba(245,240,232,0.4)", fontSize: "0.78rem" }}>{r.date}</span>
                 </div>
                 <div style={{ display: "flex", gap: 2, marginBottom: 8 }}>{[1,2,3,4,5].map(i => <span key={i} style={{ color: i <= r.rating ? "#C9A84C" : "#ddd", fontSize: 13 }}>★</span>)}</div>
@@ -356,8 +355,6 @@ export default function App() {
           </div>
         </div>
 
-        {/* ── DIVIDER 4 ── */}
-        <Divider src="/divider4.png" />
 
         {/* ── CHECKLIST ── */}
         <div ref={el => sectionRefs.current.checklist = el} style={{ width: "100%", background: "#1A3A4A" }}>
@@ -384,8 +381,6 @@ export default function App() {
           </div>
         </div>
 
-        {/* ── DIVIDER 5 ── */}
-        <Divider src="/divider5.png" />
 
         {/* ── RECOMMENDATIONS ── */}
         <div ref={el => sectionRefs.current.recommendations = el} style={{ width: "100%", background: "#1A3A4A" }}>
@@ -398,7 +393,7 @@ export default function App() {
                 <div key={rec.category} style={cardStyle}>
                   <div style={{ fontSize: "0.72rem", fontWeight: 700, color: "#1A3A4A", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 16 }}>{rec.icon} {rec.category}</div>
                   {rec.items.map(item => (
-                    <div key={item} style={{ padding: "9px 0", borderBottom: "1px solid #f5f5f5", color: "rgba(245,240,232,0.75)", fontSize: "0.88rem", display: "flex", gap: 10, alignItems: "flex-start" }}>
+                    <div key={item} style={{ padding: "9px 0", borderBottom: "1px solid #f5f5f5", color: "#555", fontSize: "0.88rem", display: "flex", gap: 10, alignItems: "flex-start" }}>
                       <span style={{ color: "#C9A84C", fontSize: 9, marginTop: 4, flexShrink: 0 }}>◆</span>{item}
                     </div>
                   ))}
@@ -408,8 +403,6 @@ export default function App() {
           </div>
         </div>
 
-        {/* ── DIVIDER 6 ── */}
-        <Divider src="/divider6.png" />
 
         {/* ── GALLERY ── */}
         <div ref={el => sectionRefs.current.gallery = el} style={{ width: "100%", background: "#1A3A4A" }}>
