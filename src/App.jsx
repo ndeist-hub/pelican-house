@@ -181,29 +181,25 @@ export default function App() {
         <div ref={el => sectionRefs.current.story = el} style={{ width: "100%", background: "#1A3A4A" }}>
           <div style={{ background: "#1A3A4A", padding: "clamp(40px, 6vw, 80px) 0" }}>
             <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(20px, 6vw, 80px)" }}>
-              <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 300px) 1fr", gap: "clamp(30px, 5vw, 60px)", alignItems: "start" }}>
-                {/* Photo */}
-                <div style={{ minWidth: 0 }}>
-                  <div style={{ width: "100%", aspectRatio: "3/4", background: "rgba(255,255,255,0.05)", borderRadius: 2, overflow: "hidden" }}>
-                    <img src="/family.jpg" alt="The Deist Family" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
-                      onError={e => { e.target.style.display = "none"; e.target.nextSibling.style.display = "flex"; }} />
-                    <div style={{ display: "none", width: "100%", height: "100%", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 12 }}>
-                      <div style={{ fontSize: 48, opacity: 0.15 }}>📷</div>
-                      <p style={{ color: "rgba(255,255,255,0.2)", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", margin: 0 }}>Photo coming soon</p>
-                    </div>
-                  </div>
-                  <div style={{ marginTop: 14 }}>
-                    <p style={{ color: "#C9A84C", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", margin: "0 0 4px" }}>The Deist Family</p>
-                    <p style={{ color: "rgba(255,255,255,0.65)", fontStyle: "italic", fontSize: "0.9rem", margin: 0 }}>San Sebastian, Mozambique</p>
-                  </div>
+              {/* Photo — full width landscape above text */}
+              <div style={{ width: "100%", aspectRatio: "16/7", background: "rgba(255,255,255,0.05)", borderRadius: 2, overflow: "hidden", marginBottom: 32 }}>
+                <img src="/family.jpg" alt="The Deist Family" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }}
+                  onError={e => { e.target.style.display = "none"; e.target.nextSibling.style.display = "flex"; }} />
+                <div style={{ display: "none", width: "100%", height: "100%", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 12 }}>
+                  <div style={{ fontSize: 48, opacity: 0.15 }}>📷</div>
+                  <p style={{ color: "rgba(255,255,255,0.2)", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", margin: 0 }}>Photo coming soon</p>
                 </div>
-                {/* Script */}
-                <div style={{ minWidth: 0, paddingTop: 4 }}>
-                  <p style={{ color: "#C9A84C", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 24, marginTop: 0 }}>The Pelican Point Story</p>
-                  {DEBBIE_SCRIPT.split("\n\n").map((para, i) => (
-                    <p key={i} style={{ fontFamily: font, fontStyle: "italic", fontSize: "1rem", lineHeight: 1.9, color: "rgba(255,255,255,0.82)", marginBottom: 22, marginTop: 0 }}>{para}</p>
-                  ))}
-                </div>
+              </div>
+              <div style={{ marginBottom: 32 }}>
+                <p style={{ color: "#C9A84C", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", margin: "0 0 4px" }}>The Deist Family</p>
+                <p style={{ color: "rgba(255,255,255,0.5)", fontStyle: "italic", fontSize: "0.85rem", margin: 0 }}>San Sebastian, Mozambique</p>
+              </div>
+              {/* Script */}
+              <div style={{ maxWidth: 780 }}>
+                <p style={{ color: "#C9A84C", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 24, marginTop: 0 }}>The Pelican Point Story</p>
+                {DEBBIE_SCRIPT.split("\n\n").map((para, i) => (
+                  <p key={i} style={{ fontFamily: font, fontStyle: "italic", fontSize: "1rem", lineHeight: 1.9, color: "rgba(255,255,255,0.82)", marginBottom: 22, marginTop: 0 }}>{para}</p>
+                ))}
               </div>
             </div>
           </div>
