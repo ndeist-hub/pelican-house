@@ -57,12 +57,6 @@ const DEBBIE_SCRIPT = `I set out to find a place where my family could truly rec
 
 Pelican Point was born from that search. A place built not against nature, but completely within it. No walls between you and the dune forest. No barrier between you and the sea. You arrive, and slowly, without noticing exactly when it happens, you surrender to the tides and the rhythm of the day. Being in harmony with the natural forces of this unique environment is the source of Pelican Point's restorative power for both body and soul.
 
-To encourage a natural submission to these forces, I used local materials and knowledge to design the structure to harmonise with the ecosystem throughout the day and as conditions change with the seasons. The most prominent features are the vaulted Jekka roof; a raised, flowing lime-washed concrete platform that links the various living areas or pods; and the natural, unmanicured garden within which the structure stands. The Jekka roof, supported by a winding ring beam, sits above you like a giant tree canopy, keeping you cool in the midday heat and sheltered from the torrential rains. The flowing raised platform and lack of walls allow you to meander between the pods, feeling fully immersed in the dune forest and coastal ecosystem. The rooms are enclosed beneath the vaulted Jekka canopy in open cream canvas tents with protective shutters, and all the furniture is embedded in the concrete platform. This design insulates you from the harsh aspects of the environment but stays true to the immersive experience I set out to create. Every room opens onto a different aspect of the surrounding ecosystem, creating a distinct experience and a desire to return.
-
-The structure sits within an unmanicured garden filled with Lala palms, marulas, umbrella-thorn acacias, and dune thicket. To our delight, we often find eland and wildebeest meandering and grazing happily in front of us in the afternoon or at sunrise, whilst a resident troop of vervet monkeys forages for marula fruits or hunts for crabs on the nearby beach at low tide. On most days, the structure acts as a viewing hide, allowing you to directly observe the daily hunting rituals of a variety of waterbirds, including our famous pelicans, as channels of water form when the estuary drains or fills with the tides. If you're very lucky, you'll see dolphins swim in between the labyrinth of sand banks and mangroves in front of the house at high tide, or ospreys swooping down to the water as they target fish and moray eels erratically looking for shelter amongst the roots of the mangroves. At night, the dune forest shifts into a different key: geckos and bats emerge to feast on the array of nocturnal insects attracted to the soft, flickering lights that illuminate the entertainment area where we typically have dinner and discuss the happenings of the day, and then, a little later, on some nights when the coast is clear, bushbabies arrive on site for a midnight raid.
-
-Everyday activities are also shaped by natural conditions. On windy days, you sail or kite. On still days, you explore the Bazaruto Archipelago equipped with your snorkelling gear and a packed lunch, or go out beyond the reef to catch supper. When the rains come, you sit under the Jekka roof and listen to the soothing patter of rain while reading your book or playing board games. You stop resisting your conditions. You start living inside them. And in doing so, you remember what it feels like to live in harmony with the natural world.
-
 It's also important to remember that Pelican Point serves a greater purpose — as visitors to this environment, we have a duty to preserve the ecosystem and contribute to the upliftment of the communities that live within it. The Sanctuary, in which Pelican Point resides, consists of thirty thousand hectares of protected coastline, wetland, and sea, and is part of the greater Bazaruto Archipelago, one of the last truly intact marine ecosystems on earth. When you stay here, your visit directly funds its protection and uplifts the communities that have lived on this coastline for generations.`;
 
 function AvailabilityCalendar() {
@@ -141,6 +135,16 @@ export default function App() {
 
   return (
     <div style={{ fontFamily: font, background: "#1A3A4A" }}>
+      <style>{`
+        * { box-sizing: border-box; }
+        @media (max-width: 768px) {
+          .section-pad { padding: 60px 20px 60px !important; }
+          .story-float { float: none !important; width: 100% !important; margin-right: 0 !important; margin-bottom: 24px !important; }
+          .grid-2col { grid-template-columns: 1fr !important; }
+          .wide-pad { padding: 60px 20px 60px !important; }
+          .booking-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
 
       {/* Hamburger */}
       <button onClick={() => setMenuOpen(o => !o)} style={{ position: "fixed", top: 24, left: 24, zIndex: 1000, background: "none", border: "none", cursor: "pointer", padding: 8, display: "flex", flexDirection: "column", gap: 5 }}>
@@ -174,10 +178,10 @@ export default function App() {
 
         {/* ── STORY ── */}
         <div ref={el => sectionRefs.current.story = el} style={{ width: "100%", background: "#1A3A4A" }}>
-          <div style={{ background: "#1A3A4A", padding: "80px 0" }}>
-            <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 80px" }}>
+          <div style={{ background: "#1A3A4A", padding: "clamp(40px, 6vw, 80px) 0" }}>
+            <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(20px, 6vw, 80px)" }}>
               {/* Photo + name — floated left, text wraps around and below */}
-              <div style={{ float: "left", width: 320, marginRight: 64, marginBottom: 32 }}>
+              <div className="story-float" style={{ float: "left", width: "min(320px, 100%)", marginRight: 64, marginBottom: 32 }}>
                 <div style={{ width: "100%", aspectRatio: "3/4", background: "rgba(255,255,255,0.05)", borderRadius: 2, overflow: "hidden" }}>
                   <img src="/debbie.jpeg" alt="Debbie Deist" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
                     onError={e => { e.target.style.display = "none"; e.target.nextSibling.style.display = "flex"; }} />
@@ -208,7 +212,7 @@ export default function App() {
 
         {/* ── STAY ── */}
         <div ref={el => sectionRefs.current.stay = el} style={{ width: "100%", background: "#1A3A4A" }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "100px 80px 80px" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(60px, 8vw, 100px) clamp(20px, 6vw, 80px) 80px" }}>
             <h2 style={sectionHead}>Stay at Pelican Point</h2>
             {goldLine}
 
@@ -225,7 +229,7 @@ export default function App() {
             </div>
 
             {/* Amenity icons */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: 10, marginBottom: 60 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(130px, 45%), 1fr))", gap: 10, marginBottom: 60 }}>
               {[["🛏️","6 En Suite Bedrooms"],["👨‍🍳","4 Full-Time Staff incl. Chef & Skipper"],["⛵","Boat"],["🏊","Swimming Pool"],["🚙","Game Vehicle"],["🌊","Hobie Cat · SUP Boards · Canoes"],["🤿","Snorkelling Gear"],["🦟","Mosquito Nets in All Rooms"],["📶","Fast Wi-Fi"],["🚭","No Smoking & No Drugs"]].map(([icon, label]) => (
                 <div key={label} style={{ textAlign: "center", padding: "20px 10px", background: "#fff", borderRadius: 3, border: "1px solid rgba(26,58,74,0.08)" }}>
                   <div style={{ fontSize: 24, marginBottom: 8 }}>{icon}</div>
@@ -237,7 +241,7 @@ export default function App() {
             {/* Rooms */}
             <p style={subHead}>The Rooms</p>
             <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 28 }}>Each room opens onto a different aspect of the surrounding ecosystem.</h3>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20, marginBottom: 60 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))", gap: 20, marginBottom: 60 }}>
               {ROOMS.map((room, i) => (
                 <div key={i} style={{ ...cardStyle, padding: 0, overflow: "hidden" }}>
                   <div style={{ width: "100%", aspectRatio: "4/3", background: "#f5f5f5", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -261,7 +265,7 @@ export default function App() {
             {/* Staff */}
             <p style={subHead}>Meet Your Team</p>
             <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 28 }}>Four dedicated staff to make your stay exceptional.</h3>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20, marginBottom: 60 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(220px, 100%), 1fr))", gap: 20, marginBottom: 60 }}>
               {STAFF.map(member => (
                 <div key={member.name} style={{ ...cardStyle, padding: 0, overflow: "hidden" }}>
                   <div style={{ width: "100%", aspectRatio: "1/1", background: "#f5f5f5", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
@@ -298,7 +302,7 @@ export default function App() {
                   <input name="name" style={inputStyle} placeholder="Your name" value={bookingForm.name} onChange={e => setBookingForm({...bookingForm, name: e.target.value})} required />
                   <Label>Email Address</Label>
                   <input name="email" type="email" style={inputStyle} placeholder="you@example.com" value={bookingForm.email} onChange={e => setBookingForm({...bookingForm, email: e.target.value})} required />
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(200px, 100%), 1fr))", gap: 16 }}>
                     <div><Label>Check-in</Label><input name="checkin" type="date" style={inputStyle} value={bookingForm.checkin} onChange={e => setBookingForm({...bookingForm, checkin: e.target.value})} required /></div>
                     <div><Label>Check-out</Label><input name="checkout" type="date" style={inputStyle} value={bookingForm.checkout} onChange={e => setBookingForm({...bookingForm, checkout: e.target.value})} required /></div>
                   </div>
@@ -319,7 +323,7 @@ export default function App() {
 
         {/* ── GUESTBOOK ── */}
         <div ref={el => sectionRefs.current.guestbook = el} style={{ width: "100%", background: "#1A3A4A" }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "100px 80px 80px" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(60px, 8vw, 100px) clamp(20px, 6vw, 80px) 80px" }}>
             <h2 style={sectionHead}>Guestbook</h2>
             {goldLine}
             <p style={{ color: "rgba(245,240,232,0.65)", marginBottom: 44, fontStyle: "italic", lineHeight: 1.7 }}>Pelican Point is built on stories — the ones the land holds, and the ones our guests bring. We'd love to hear yours.</p>
@@ -358,12 +362,12 @@ export default function App() {
 
         {/* ── CHECKLIST ── */}
         <div ref={el => sectionRefs.current.checklist = el} style={{ width: "100%", background: "#1A3A4A" }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "100px 80px 80px" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(60px, 8vw, 100px) clamp(20px, 6vw, 80px) 80px" }}>
             <h2 style={sectionHead}>Guest Checklist</h2>
             {goldLine}
             <p style={{ color: "rgba(245,240,232,0.65)", marginBottom: 44, fontStyle: "italic" }}>Everything you need to prepare for a seamless stay at Pelican Point.</p>
             {CHECKLIST.map(group => (
-              <div key={group.group} style={{ marginBottom: 36 }}>
+              <div key={group.group} style={{ background: "#fff", borderRadius: 4, padding: 28, marginBottom: 20, border: "1px solid rgba(26,58,74,0.08)", boxShadow: "0 2px 16px rgba(0,0,0,0.08)" }}>
                 <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "#1A3A4A", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 12, paddingBottom: 8, borderBottom: "1px solid #eee" }}>{group.group}</div>
                 {group.items.map(item => {
                   const k = group.group + item; const isChecked = !!checked[k];
@@ -372,7 +376,7 @@ export default function App() {
                       <div style={{ width: 20, height: 20, borderRadius: 2, border: isChecked ? "none" : "1px solid rgba(201,168,76,0.6)", background: isChecked ? "#C9A84C" : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all 0.2s" }}>
                         {isChecked && <span style={{ color: "#fff", fontSize: 11, fontWeight: 700 }}>✓</span>}
                       </div>
-                      <span style={{ color: "rgba(245,240,232,0.75)", fontSize: "0.95rem", textDecoration: isChecked ? "line-through" : "none" }}>{item}</span>
+                      <span style={{ color: "#444", fontSize: "0.95rem", textDecoration: isChecked ? "line-through" : "none" }}>{item}</span>
                     </div>
                   );
                 })}
@@ -384,11 +388,11 @@ export default function App() {
 
         {/* ── RECOMMENDATIONS ── */}
         <div ref={el => sectionRefs.current.recommendations = el} style={{ width: "100%", background: "#1A3A4A" }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "100px 80px 80px" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(60px, 8vw, 100px) clamp(20px, 6vw, 80px) 80px" }}>
             <h2 style={sectionHead}>Recommendations for Your Stay</h2>
             {goldLine}
             <p style={{ color: "rgba(245,240,232,0.65)", marginBottom: 44, fontStyle: "italic" }}>Our personal picks to help you make the most of San Sebastian and the surrounding area.</p>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))", gap: 20 }}>
               {RECOMMENDATIONS.map(rec => (
                 <div key={rec.category} style={cardStyle}>
                   <div style={{ fontSize: "0.72rem", fontWeight: 700, color: "#1A3A4A", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 16 }}>{rec.icon} {rec.category}</div>
@@ -406,11 +410,11 @@ export default function App() {
 
         {/* ── GALLERY ── */}
         <div ref={el => sectionRefs.current.gallery = el} style={{ width: "100%", background: "#1A3A4A" }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "100px 80px 80px" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(60px, 8vw, 100px) clamp(20px, 6vw, 80px) 80px" }}>
             <h2 style={sectionHead}>Gallery</h2>
             {goldLine}
             <p style={{ color: "rgba(245,240,232,0.65)", marginBottom: 44, fontStyle: "italic" }}>Photos of Pelican Point and the wild beauty of The Sanctuary. More images coming soon.</p>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 10 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(280px, 100%), 1fr))", gap: 10 }}>
               {GALLERY_PLACEHOLDERS.map((item, i) => (
                 <div key={i} onClick={() => setLightbox(i)} style={{ aspectRatio: "4/3", background: item.color, borderRadius: 2, cursor: "pointer", display: "flex", alignItems: "flex-end", overflow: "hidden", position: "relative" }}>
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%)" }} />
@@ -425,7 +429,7 @@ export default function App() {
 
         {/* ── SANCTUARY MAP ── */}
         <div ref={el => sectionRefs.current.sanctuarymap = el} style={{ width: "100%", minHeight: "100vh", background: "#1A3A4A", flexShrink: 0 }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "100px 80px 80px" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(60px, 8vw, 100px) clamp(20px, 6vw, 80px) 80px" }}>
             <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 14 }}>The Sanctuary</h2>
             <div style={{ width: 48, height: 2, background: "#C9A84C", marginBottom: 36 }} />
             <p style={{ color: "rgba(245,240,232,0.65)", marginBottom: 44, fontStyle: "italic", maxWidth: 700 }}>Pelican Point sits within The Sanctuary — 30,000 hectares of protected coastline, wetland and sea on the San Sebastian Peninsula, part of the greater Bazaruto Archipelago.</p>
@@ -438,9 +442,6 @@ export default function App() {
                 <p style={{ color: "rgba(245,240,232,0.4)", fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase" }}>Map coming soon</p>
                 <p style={{ color: "#bbb", fontSize: "0.8rem" }}>Upload sanctuary-map.png to your public/ folder</p>
               </div>
-            </div>
-            <div style={{ marginTop: 32, textAlign: "center" }}>
-              <a href="https://mozsanctuary.com" target="_blank" rel="noreferrer" style={{ background: "#1A3A4A", color: "#fff", padding: "11px 28px", textDecoration: "none", fontFamily: font, fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", borderRadius: 2 }}>Visit The Sanctuary →</a>
             </div>
           </div>
         </div>
