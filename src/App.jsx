@@ -53,7 +53,7 @@ const NAV_SECTIONS = [
 const font = "'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif";
 const goldLine = <div style={{ width: 48, height: 2, background: "#C9A84C", marginBottom: 36 }} />;
 
-const DEBBIE_SCRIPT = `I set out to find a place where my family could truly reconnect, away from the distractions and relentless pace of everyday life. Somewhere we could recharge, be present with each other, and create the kind of memories that become part of who you are.
+const DEBBIE_SCRIPT = `We set out to find a place where our family could truly reconnect, away from the distractions and relentless pace of everyday life. Somewhere we could recharge, be present with each other, and create the kind of memories that become part of who you are.
 
 Pelican Point was born from that search. A place built not against nature, but completely within it. No walls between you and the dune forest. No barrier between you and the sea. You arrive, and slowly, without noticing exactly when it happens, you surrender to the tides and the rhythm of the day. Being in harmony with the natural forces of this unique environment is the source of Pelican Point's restorative power for both body and soul.
 
@@ -140,6 +140,7 @@ export default function App() {
         @media (max-width: 768px) {
           .section-pad { padding: 60px 20px 60px !important; }
           .story-float { float: none !important; width: 100% !important; margin-right: 0 !important; margin-bottom: 24px !important; }
+          .story-grid { grid-template-columns: 1fr !important; }
           .grid-2col { grid-template-columns: 1fr !important; }
           .wide-pad { padding: 60px 20px 60px !important; }
           .booking-grid { grid-template-columns: 1fr !important; }
@@ -180,29 +181,30 @@ export default function App() {
         <div ref={el => sectionRefs.current.story = el} style={{ width: "100%", background: "#1A3A4A" }}>
           <div style={{ background: "#1A3A4A", padding: "clamp(40px, 6vw, 80px) 0" }}>
             <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(20px, 6vw, 80px)" }}>
-              {/* Photo + name — floated left, text wraps around and below */}
-              <div className="story-float" style={{ float: "left", width: "min(320px, 100%)", marginRight: 64, marginBottom: 32 }}>
-                <div style={{ width: "100%", aspectRatio: "3/4", background: "rgba(255,255,255,0.05)", borderRadius: 2, overflow: "hidden" }}>
-                  <img src="/debbie.jpeg" alt="Debbie Deist" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
-                    onError={e => { e.target.style.display = "none"; e.target.nextSibling.style.display = "flex"; }} />
-                  <div style={{ display: "none", width: "100%", height: "100%", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 12 }}>
-                    <div style={{ fontSize: 48, opacity: 0.15 }}>👤</div>
-                    <p style={{ color: "rgba(255,255,255,0.2)", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", margin: 0 }}>Photo coming soon</p>
+              <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 300px) 1fr", gap: "clamp(30px, 5vw, 60px)", alignItems: "start" }}>
+                {/* Photo */}
+                <div style={{ minWidth: 0 }}>
+                  <div style={{ width: "100%", aspectRatio: "3/4", background: "rgba(255,255,255,0.05)", borderRadius: 2, overflow: "hidden" }}>
+                    <img src="/family.jpg" alt="The Deist Family" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
+                      onError={e => { e.target.style.display = "none"; e.target.nextSibling.style.display = "flex"; }} />
+                    <div style={{ display: "none", width: "100%", height: "100%", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 12 }}>
+                      <div style={{ fontSize: 48, opacity: 0.15 }}>📷</div>
+                      <p style={{ color: "rgba(255,255,255,0.2)", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", margin: 0 }}>Photo coming soon</p>
+                    </div>
+                  </div>
+                  <div style={{ marginTop: 14 }}>
+                    <p style={{ color: "#C9A84C", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", margin: "0 0 4px" }}>The Deist Family</p>
+                    <p style={{ color: "rgba(255,255,255,0.65)", fontStyle: "italic", fontSize: "0.9rem", margin: 0 }}>San Sebastian, Mozambique</p>
                   </div>
                 </div>
-                <div style={{ marginTop: 16 }}>
-                  <p style={{ color: "#C9A84C", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", margin: "0 0 4px" }}>Founder</p>
-                  <p style={{ color: "rgba(255,255,255,0.8)", fontStyle: "italic", fontSize: "1.1rem", margin: 0 }}>Debbie Deist</p>
+                {/* Script */}
+                <div style={{ minWidth: 0, paddingTop: 4 }}>
+                  <p style={{ color: "#C9A84C", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 24, marginTop: 0 }}>The Pelican Point Story</p>
+                  {DEBBIE_SCRIPT.split("\n\n").map((para, i) => (
+                    <p key={i} style={{ fontFamily: font, fontStyle: "italic", fontSize: "1rem", lineHeight: 1.9, color: "rgba(255,255,255,0.82)", marginBottom: 22, marginTop: 0 }}>{para}</p>
+                  ))}
                 </div>
               </div>
-              {/* Script — flows beside and beneath photo */}
-              <div>
-                <p style={{ color: "#C9A84C", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 24 }}>The Pelican Point Story</p>
-                {DEBBIE_SCRIPT.split("\n\n").map((para, i) => (
-                  <p key={i} style={{ fontFamily: "'Georgia', serif", fontStyle: "italic", fontSize: "0.95rem", lineHeight: 2, color: "rgba(255,255,255,0.75)", marginBottom: 20 }}>{para}</p>
-                ))}
-              </div>
-              <div style={{ clear: "both" }} />
             </div>
           </div>
         </div>
