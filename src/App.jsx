@@ -182,10 +182,10 @@ export default function App() {
           <div style={{ background: "#1A3A4A", padding: "clamp(40px, 6vw, 80px) 0" }}>
             <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(20px, 6vw, 80px)" }}>
               {/* Photo — full width landscape above text */}
-              <div style={{ width: "100%", aspectRatio: "16/7", background: "rgba(255,255,255,0.05)", borderRadius: 2, overflow: "hidden", marginBottom: 32 }}>
-                <img src="/family.jpg" alt="The Deist Family" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }}
+              <div style={{ width: "100%", background: "rgba(255,255,255,0.05)", borderRadius: 2, overflow: "hidden", marginBottom: 32 }}>
+                <img src="/family.jpg" alt="The Deist Family" style={{ width: "100%", height: "auto", display: "block" }}
                   onError={e => { e.target.style.display = "none"; e.target.nextSibling.style.display = "flex"; }} />
-                <div style={{ display: "none", width: "100%", height: "100%", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 12 }}>
+                <div style={{ display: "none", width: "100%", height: 300, alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 12 }}>
                   <div style={{ fontSize: 48, opacity: 0.15 }}>📷</div>
                   <p style={{ color: "rgba(255,255,255,0.2)", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", margin: 0 }}>Photo coming soon</p>
                 </div>
