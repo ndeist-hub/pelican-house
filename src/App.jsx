@@ -57,7 +57,7 @@ const DEBBIE_SCRIPT = `We set out to find a place where our family could truly r
 
 Pelican Point was born from that search. A place built not against nature, but completely within it. No walls between you and the dune forest. No barrier between you and the sea. You arrive, and slowly, without noticing exactly when it happens, you surrender to the tides and the rhythm of the day. Being in harmony with the natural forces of this unique environment is the source of Pelican Point's restorative power for both body and soul.
 
-It's also important to remember that Pelican Point serves a greater purpose — as visitors to this environment, we have a duty to preserve the ecosystem and contribute to the upliftment of the communities that live within it. The Sanctuary, in which Pelican Point resides, consists of thirty thousand hectares of protected coastline, wetland, and sea, and is part of the greater Bazaruto Archipelago, one of the last truly intact marine ecosystems on earth. When you stay here, your visit directly funds its protection and uplifts the communities that have lived on this coastline for generations.`;
+The Sanctuary, in which Pelican Point resides, consists of thirty thousand hectares of protected coastline, wetland, and sea, and is part of the greater Bazaruto Archipelago, one of the last truly intact marine ecosystems on earth. When you stay here, your visit directly funds its protection and uplifts the communities that have lived on this coastline for generations.`;
 
 function AvailabilityCalendar() {
   const today = new Date();
