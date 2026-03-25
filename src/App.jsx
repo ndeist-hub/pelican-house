@@ -18,8 +18,8 @@ const ROOMS = [
   { name: "Bedroom 2", description: "Description coming soon.", photo: null },
   { name: "Bedroom 3", description: "Description coming soon.", photo: null },
   { name: "Bedroom 4", description: "Description coming soon.", photo: null },
-  { name: "Bedroom 5", description: "Description coming soon.", photo: null },
-  { name: "Bedroom 6 — Children's Room", description: "Specifically equipped for young or adolescent children, with a cot and two single beds.", photo: null },
+  { name: "Bedroom 5 — Children's Room", description: "Specifically equipped for young or adolescent children, with a cot and two single beds in addition to the king-size bed.", photo: null },
+  { name: "Bedroom 6", description: "Description coming soon.", photo: null },
 ];
 
 const GALLERY_PLACEHOLDERS = [
@@ -53,9 +53,9 @@ const NAV_SECTIONS = [
 const font = "'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif";
 const goldLine = <div style={{ width: 48, height: 2, background: "#C9A84C", marginBottom: 36 }} />;
 
-const DEBBIE_SCRIPT = `We set out to find a place where our family could truly reconnect, away from the distractions and relentless pace of everyday life. Somewhere we could recharge, be present with each other, and create the kind of memories that become part of who you are.
+const DEBBIE_SCRIPT = `Pelican Point is a place where you can reconnect with family and friends, away from the distractions and relentless pace of everyday life by being fully immersed in a remote sub-tropical escape.
 
-Pelican Point was born from that search. A place built not against nature, but completely within it. No walls between you and the dune forest. No barrier between you and the sea. You arrive, and slowly, without noticing exactly when it happens, you surrender to the tides and the rhythm of the day. Being in harmony with the natural forces of this unique environment is the source of Pelican Point's restorative power for both body and soul.
+From the day you arrive, you'll find yourself to be fully immersed in the unique dune forest and estuary ecosystems in which Pelican Point exists. With no walls between you and the dune forest or barriers between you and the sea, slowly you'll find yourself surrendering to the tides and rhythm of the day in this breathtakingly beautiful and restorative environment.
 
 The Sanctuary, in which Pelican Point resides, consists of thirty thousand hectares of protected coastline, wetland, and sea, and is part of the greater Bazaruto Archipelago, one of the last truly intact marine ecosystems on earth. When you stay here, your visit directly funds its protection and uplifts the communities that have lived on this coastline for generations.`;
 
@@ -130,7 +130,7 @@ export default function App() {
 
   const prose = { lineHeight: 1.95, color: "#444", fontSize: "1rem", marginBottom: 20 };
   const sectionHead = { fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 14 };
-  const subHead = { fontSize: "0.62rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "#C9A84C", marginBottom: 16 };
+  const subHead = { fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C9A84C", marginBottom: 14, fontFamily: "'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif", fontWeight: 600 };
   const cardStyle = { background: "#fff", borderRadius: 4, padding: 28, border: "1px solid rgba(26,58,74,0.08)", boxShadow: "0 2px 16px rgba(0,0,0,0.08)" };
 
   return (
@@ -168,7 +168,7 @@ export default function App() {
 
         {/* ── HERO ── */}
         <div ref={el => sectionRefs.current.hero = el} style={{ width: "100%", height: "100vh", position: "relative", overflow: "hidden", flexShrink: 0 }}>
-          <video autoPlay loop muted playsInline style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", minWidth: "100%", minHeight: "100%", width: "auto", height: "auto", objectFit: "cover" }} src="/Houseflyover3.mp4" />
+          <img src="/Mum Wading in Water.jpeg" alt="Pelican Point" style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", minWidth: "100%", minHeight: "100%", width: "auto", height: "auto", objectFit: "cover" }} />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.6) 100%)" }} />
           <div style={{ position: "relative", zIndex: 2, height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", padding: "0 24px 10vh", textAlign: "center" }}>
             <h1 style={{ fontSize: "clamp(3rem, 10vw, 6.5rem)", color: "#fff", fontWeight: 400, letterSpacing: "0.1em", margin: "0 0 10px", textTransform: "uppercase", lineHeight: 1 }}>Pelican Point</h1>
@@ -180,27 +180,11 @@ export default function App() {
         {/* ── STORY ── */}
         <div ref={el => sectionRefs.current.story = el} style={{ width: "100%", background: "#1A3A4A" }}>
           <div style={{ background: "#1A3A4A", padding: "clamp(40px, 6vw, 80px) 0" }}>
-            <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(20px, 6vw, 80px)" }}>
-              {/* Photo — full width landscape above text */}
-              <div style={{ width: "100%", background: "rgba(255,255,255,0.05)", borderRadius: 2, overflow: "hidden", marginBottom: 32 }}>
-                <img src="/family.jpg" alt="The Deist Family" style={{ width: "100%", height: "auto", display: "block" }}
-                  onError={e => { e.target.style.display = "none"; e.target.nextSibling.style.display = "flex"; }} />
-                <div style={{ display: "none", width: "100%", height: 300, alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 12 }}>
-                  <div style={{ fontSize: 48, opacity: 0.15 }}>📷</div>
-                  <p style={{ color: "rgba(255,255,255,0.2)", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", margin: 0 }}>Photo coming soon</p>
-                </div>
-              </div>
-              <div style={{ marginBottom: 32 }}>
-                <p style={{ color: "#C9A84C", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", margin: "0 0 4px" }}>The Deist Family</p>
-                <p style={{ color: "rgba(255,255,255,0.5)", fontStyle: "italic", fontSize: "0.85rem", margin: 0 }}>San Sebastian, Mozambique</p>
-              </div>
-              {/* Script */}
-              <div style={{ maxWidth: 780 }}>
-                <p style={{ color: "#C9A84C", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 24, marginTop: 0 }}>The Pelican Point Story</p>
-                {DEBBIE_SCRIPT.split("\n\n").map((para, i) => (
-                  <p key={i} style={{ fontFamily: font, fontStyle: "italic", fontSize: "1rem", lineHeight: 1.9, color: "rgba(255,255,255,0.82)", marginBottom: 22, marginTop: 0 }}>{para}</p>
-                ))}
-              </div>
+            <div style={{ maxWidth: 780, margin: "0 auto", padding: "0 clamp(20px, 6vw, 80px)" }}>
+              <p style={{ color: "#C9A84C", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 24, marginTop: 0 }}>The Pelican Point Story</p>
+              {DEBBIE_SCRIPT.split("\n\n").map((para, i) => (
+                <p key={i} style={{ fontFamily: font, fontStyle: "italic", fontSize: "1rem", lineHeight: 1.9, color: "rgba(255,255,255,0.82)", marginBottom: 22, marginTop: 0 }}>{para}</p>
+              ))}
             </div>
           </div>
         </div>
@@ -215,30 +199,33 @@ export default function App() {
             {goldLine}
 
             {/* Intro */}
-            <div style={{ ...cardStyle, marginBottom: 40 }}>
-              <p style={{ ...prose, fontStyle: "italic" }}>The house has six en suite bedrooms, one of which is specifically equipped for young or adolescent children. At full capacity, we can accommodate 12 adult guests.</p>
-              <p style={prose}>All rooms have access to hot running water and electricity, and include an overhead fan, mosquito nets and plug points to charge devices or power a hairdryer. All the rooms have a king-size bed, and the children's room includes a cot and 2 single beds for young children. Ramiro will ensure your rooms are clean and that you have fresh linen and towels throughout your stay.</p>
-              <p style={prose}>You will have access to our fully equipped kitchen, which includes two fridges, a dishwasher, pantry space and a gas hob, along with the necessary cooking items. We also have a gas braai that you can use. Raymondo, our chef, will help you cook meals and attend to your food-related requirements.</p>
-              <p style={prose}>Our entertainment area includes a bar with a filtered water dispenser, coffee machines, mini fridges and ice-making machines. Please note that our pool is uncovered, so please be extra vigilant with anyone who can't swim. We also have a table tennis and pool table which you are welcome to enjoy.</p>
-              <p style={prose}>As part of your stay, you will have access to our boat, which will be driven only by our skipper or Juvencio. The boat will ferry you to and from Vilankulos as required and serve as your primary mode of transport in the Archipelago. The boat can be made available for deep-sea fishing upon request and at an additional charge.</p>
-              <p style={prose}>You will have access to our SUPs and kayaks, and we encourage you to bring your own snorkelling gear. The Hobie Cat will be available only upon request and for an additional fee, subject to strict safety rules.</p>
-              <p style={prose}>We have a game vehicle that you will have access to, to explore the Sanctuary's interior, and this must be driven by Juvencio.</p>
-              <p style={{ ...prose, marginBottom: 0, color: "#444", fontWeight: 500 }}>As general policy, we allow no glass in the pool, and smoking and recreational drug use are strictly forbidden on the premises. Any issues regarding your stay whilst on site should be directed to Juvencio and can then be escalated appropriately to Debbie Deist.</p>
-            </div>
+            <p style={{ fontStyle: "italic", marginBottom: 48, lineHeight: 1.95, color: "rgba(245,240,232,0.75)", fontSize: "1rem" }}>Pelican Point accommodates up to 12 adult guests across six en suite bedrooms, and any booking grants exclusive access to the house.</p>
 
-            {/* Amenity icons */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(130px, 45%), 1fr))", gap: 10, marginBottom: 60 }}>
-              {[["🛏️","6 En Suite Bedrooms"],["👨‍🍳","4 Full-Time Staff incl. Chef & Skipper"],["⛵","Boat"],["🏊","Swimming Pool"],["🚙","Game Vehicle"],["🌊","Hobie Cat · SUP Boards · Canoes"],["🤿","Snorkelling Gear"],["🦟","Mosquito Nets in All Rooms"],["📶","Fast Wi-Fi"],["🚭","No Smoking & No Drugs"]].map(([icon, label]) => (
-                <div key={label} style={{ textAlign: "center", padding: "20px 10px", background: "#fff", borderRadius: 3, border: "1px solid rgba(26,58,74,0.08)" }}>
-                  <div style={{ fontSize: 24, marginBottom: 8 }}>{icon}</div>
-                  <div style={{ fontSize: "0.62rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#555", lineHeight: 1.4 }}>{label}</div>
+            {/* Feature tiles */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))", gap: 16, marginBottom: 60 }}>
+              {[
+                { icon: "🛏️", title: "Six En Suite Bedrooms", text: "All rooms have king-size beds, hot water, showers and baths, mosquito nets, overhead fans and plug points. One room is configured for children with a cot and two single beds in addition to the king-size bed. Please note the water is not suitable for drinking." },
+                { icon: "🍳", title: "Fully Equipped Kitchen", text: "Two fridges, dishwasher, gas hob, pantry and a gas braai." },
+                { icon: "👨‍🍳", title: "Full-Time Staff", text: "Three full-time staff are included to make your stay comfortable and enjoyable — a house manager, personal chef and housekeeper." },
+                { icon: "🎱", title: "Entertainment Area", text: "Bar (guests must stock), filtered water dispenser, coffee machine, kettle, toaster, ice maker, wireless speaker, pool table and table tennis." },
+                { icon: "🏊", title: "Swimming Pool", text: "The pool is uncovered — vigilance is required with young children and swimming is at guests' own risk. No glass in the pool at any time." },
+                { icon: "🛥️", title: "Motor Boat", text: "Available for island transfers and exploration of the Archipelago within the reef. A skipper is provided at all times — no guests are permitted to drive the boat. Please get in touch for deep-sea fishing enquiries." },
+                { icon: "🚙", title: "Game Vehicle", text: "Available for excursions into the Sanctuary's interior. A guide is provided to drive at all times — no guests are permitted to drive the vehicle." },
+                { icon: "🌊", title: "Water Sports", text: "Two kayaks and SUP boards on site. A Hobie Cat is available on request. Guests are encouraged to bring their own snorkelling, fishing or preferred water sports gear." },
+                { icon: "📡", title: "Wi-Fi (Starlink)", text: "Wi-Fi is available via Starlink. Currently a little slow, so for those needing to work we recommend supplementing with a local cellular data package." },
+                { icon: "📋", title: "House Rules", text: "No glass in the pool · No smoking · No recreational drugs on the premises · All guests must adhere to the Sanctuary's noise policy." },
+              ].map(({ icon, title, text }) => (
+                <div key={title} style={{ background: "#fff", borderRadius: 4, padding: 24, border: "1px solid rgba(26,58,74,0.08)", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
+                  <div style={{ fontSize: 28, marginBottom: 12 }}>{icon}</div>
+                  <p style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#1A3A4A", margin: "0 0 10px" }}>{title}</p>
+                  <p style={{ fontSize: "0.88rem", color: "#555", lineHeight: 1.75, margin: 0 }}>{text}</p>
                 </div>
               ))}
             </div>
 
             {/* Rooms */}
             <p style={subHead}>The Rooms</p>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 28 }}>Each room opens onto a different aspect of the surrounding ecosystem.</h3>
+            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "rgba(245,240,232,0.75)", marginBottom: 28 }}>Each room opens onto a different aspect of the surrounding ecosystem.</h3>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))", gap: 20, marginBottom: 60 }}>
               {ROOMS.map((room, i) => (
                 <div key={i} style={{ ...cardStyle, padding: 0, overflow: "hidden" }}>
@@ -253,29 +240,8 @@ export default function App() {
                   </div>
                   <div style={{ padding: "20px 24px 24px" }}>
                     <p style={{ fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C9A84C", margin: "0 0 6px" }}>Bedroom {i + 1}</p>
-                    <h4 style={{ fontSize: "1rem", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", margin: "0 0 10px" }}>{room.name}</h4>
-                    <p style={{ fontSize: "0.85rem", color: "rgba(245,240,232,0.65)", lineHeight: 1.75, margin: 0 }}>{room.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Staff */}
-            <p style={subHead}>Meet Your Team</p>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 28 }}>Four dedicated staff to make your stay exceptional.</h3>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(220px, 100%), 1fr))", gap: 20, marginBottom: 60 }}>
-              {STAFF.map(member => (
-                <div key={member.name} style={{ ...cardStyle, padding: 0, overflow: "hidden" }}>
-                  <div style={{ width: "100%", aspectRatio: "1/1", background: "#f5f5f5", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-                    {member.photo ? <img src={member.photo} alt={member.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : <>
-                      <div style={{ fontSize: 36, opacity: 0.15, marginBottom: 6 }}>👤</div>
-                      <p style={{ color: "#ccc", fontSize: "0.58rem", letterSpacing: "0.15em", textTransform: "uppercase", margin: 0 }}>Photo coming soon</p>
-                    </>}
-                  </div>
-                  <div style={{ padding: "18px 20px 22px" }}>
-                    <p style={{ fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C9A84C", margin: "0 0 4px" }}>{member.role}</p>
-                    <h4 style={{ fontSize: "1rem", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", margin: "0 0 10px" }}>{member.name}</h4>
-                    <p style={{ fontSize: "0.82rem", color: "#333", lineHeight: 1.75, margin: 0 }}>{member.bio}</p>
+                    <h4 style={{ fontSize: "1rem", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", margin: "0 0 10px" }}>{room.name}</h4>
+                    <p style={{ fontSize: "0.85rem", color: "#555", lineHeight: 1.75, margin: 0 }}>{room.description}</p>
                   </div>
                 </div>
               ))}
@@ -283,10 +249,10 @@ export default function App() {
 
             {/* Availability & Booking */}
             <p style={subHead}>Availability</p>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 28 }}>Check available dates below.</h3>
+            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "rgba(245,240,232,0.75)", marginBottom: 28 }}>Check available dates below.</h3>
             <AvailabilityCalendar />
             <p style={subHead}>Request a Booking</p>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 28 }}>We'll confirm availability and pricing within 24 hours.</h3>
+            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "rgba(245,240,232,0.75)", marginBottom: 28 }}>We'll confirm availability and pricing within 24 hours.</h3>
             {bookingSubmitted ? (
               <div style={{ background: "#EDF7F0", border: "1px solid #A8D4B8", borderRadius: 4, padding: 36, textAlign: "center", color: "#1A5C30" }}>
                 <div style={{ fontSize: 40, marginBottom: 12 }}>✉️</div>
