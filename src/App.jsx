@@ -1,16 +1,113 @@
 import { useState, useEffect, useRef } from "react";
 
 const CHECKLIST = [
-  { group: "Before You Arrive", items: ["Confirm your arrival time with us", "Check weather forecast for your stay", "Download offline maps for the area", "Arrange travel insurance if needed", "Pack beach towels & sun protection"] },
-  { group: "On Arrival Day", items: ["Collect key from lockbox (code in email)", "Check heating/cooling preferences", "Familiarise yourself with fire exits", "Read the house manual on the kitchen counter", "WhatsApp us to let us know you've arrived safely"] },
-  { group: "What to Bring", items: ["Beach/swim gear", "Casual & smart-casual clothing", "Good walking shoes", "Reusable bags for the market", "Any prescription medications"] },
+  {
+    group: "Daywear",
+    items: [
+      "Costumes / swimwear",
+      "Rashvests and fishing shirts",
+      "Light windbreaker for boat trips or sunset game drives",
+      "Sarongs, light dresses and kaftans",
+      "T-shirt and shorts you don't mind getting wet",
+      "Long-sleeve linen or cotton shirts",
+      "Leggings or light trousers with walking shoes — there are ticks, snakes and thorns, so bring gear that provides adequate protection on walks",
+      "Cap or hat and sunglasses",
+      "Water shoes for wading at low tide and watersports — there are razor clams in some areas",
+      "Slip-slops",
+      "Exercise gear — prepare for thick sand if you want to run",
+      "Sunblock (best brand for no stains on whites) and anti-sun treatments",
+      "Repellent for ticks and mosquitoes",
+      "Binoculars",
+      "Fins and goggles",
+      "Fishing and kiting gear",
+    ],
+  },
+  {
+    group: "Nightwear",
+    items: [
+      "After 5pm, change into mosquito and insect-proof clothing — loose-fitting, breathable materials (linen or light cotton) that cover arms and legs. Light colours work best",
+      "Pull-on pants — kikoi, pyjama style or very light single-jersey trackpant",
+      "Long-sleeve shirt in very light fabric or long-sleeve t-shirt",
+      "Long-sleeve kaftans",
+      "A sweatshirt for the colder months",
+      "Espadrilles or a light, soft shoe for walking around at night",
+      "Pocket torch — very useful at night",
+    ],
+  },
+  {
+    group: "Travel Insurance",
+    items: [
+      "Take out comprehensive travel insurance covering medical emergencies with emergency evacuation to high-quality trauma facilities in Maputo or Johannesburg",
+    ],
+  },
+  {
+    group: "Malaria",
+    items: [
+      "Pelican Point is in a malaria area — discuss medication options with your doctor before arriving",
+      "The highest risk is when in Vilankulos. Very few cases have been reported in the Pelican Point area",
+      "All rooms are equipped with mosquito nets",
+      "Bring mosquito repellent",
+    ],
+  },
+  {
+    group: "Medication",
+    items: [
+      "There is a basic first aid kit at the house and on the boat for minor injuries",
+      "Bring all your own medication — Pelican Point is in a remote area",
+      "Bring a course of antibiotics for more serious infections",
+      "Topical mupirocin ointment for minor infections (e.g. Supiroban)",
+      "Antihistamine, stop-itch cream or Mylocort (one of these is important)",
+      "Thick body cream (e.g. Bergamot cream from The Body Shop)",
+    ],
+  },
 ];
 
 const RECOMMENDATIONS = [
-  { category: "Eat & Drink", icon: "🍽️", items: ["The Harbour Kitchen – best seafood in town", "Dune Coffee Roasters – morning must-visit", "Pelican Bay Tapas – great for sunsets", "The Rockpool – fine dining, book ahead"] },
-  { category: "Activities", icon: "🌊", items: ["Kayak rental at the marina", "Sunrise yoga on North Beach", "Coastal heritage trail walk", "Glass-bottom boat tours"] },
-  { category: "Day Trips", icon: "🗺️", items: ["Lighthouse Point – 20 min drive", "Old Town Market – Saturdays only", "Nature Reserve & bird sanctuary", "Vineyard tours in the valley"] },
-  { category: "Local Tips", icon: "💡", items: ["Park on Shore Rd to avoid crowds", "Tides are best 7–9am for swimming", "Grab fresh fish at the pier daily", "Sunsets are best from the dune path"] },
+  {
+    category: "Eat & Drink",
+    icon: "🍽️",
+    items: [
+      "All food and drink can be ordered and delivered to Pelican Point via the Sanctuary office",
+      "Mozambique has strict rules on the importation of alcohol and certain food items — please check these before packing",
+    ],
+  },
+  {
+    category: "Marine Activities",
+    icon: "🌊",
+    items: [
+      "SUP boarding and kayaking in the mangroves at high tide",
+      "Beach walks at low tide",
+      "Lunch or sundowners on a sandbank or Banque Island",
+      "Snorkelling at low tide — Artificial reef at Mazarette, Magaruque Island, or the aquarium at the 2-mile reef (the best)",
+      "Scuba diving — outfitters from Vilankulos come to The Sanctuary by arrangement. Contact Dive Bazaruto or Odyssey Dive",
+      "Kitesurfing lessons in Vilankulos — Kitesurfing Centre",
+      "Horse riding in Vilankulos — Vilankulos Horse Safaris",
+      "Check the tide table at mozsanctuary.com/info/tide-table",
+    ],
+  },
+  {
+    category: "Fishing",
+    icon: "🎣",
+    items: [
+      "Deep-sea fishing with a specialist skipper — available on request",
+      "Salt water fly fishing and spinning permitted in the main channels beyond the Marine Protected Areas",
+      "Fishing is prohibited within the Marine Protected Areas off The Sanctuary's shoreline (marked by buoys) and restricted to designated areas in the Bazaruto Archipelago National Park",
+      "Each angler must carry a personal fishing licence valid for 30 days — issued by The Sanctuary office",
+      "Adhere to recreational size and bag limits. Trophy species require a special licence",
+      "Release undersize or over-limit fish carefully and promptly. Sale of recreational fish is not permitted",
+      "We encourage catch and release",
+    ],
+  },
+  {
+    category: "Terrestrial Activities",
+    icon: "🦒",
+    items: [
+      "Sundowners at World's View and Ocean View",
+      "Bush drives to the waterhole and lighthouse",
+      "Bush walks",
+      "298 bird species recorded in The Sanctuary — a full checklist is available on request",
+    ],
+  },
 ];
 
 const ROOMS = [
@@ -168,7 +265,7 @@ export default function App() {
 
         {/* ── HERO ── */}
         <div ref={el => sectionRefs.current.hero = el} style={{ width: "100%", height: "100vh", position: "relative", overflow: "hidden", flexShrink: 0 }}>
-          <img src="/Mum Wading in Water.jpeg" alt="Pelican Point" style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", minWidth: "100%", minHeight: "100%", width: "auto", height: "auto", objectFit: "cover" }} />
+          <img src="/Mum Wading in Water.jpeg" alt="Pelican Point" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "contain", objectPosition: "center center" }} />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.6) 100%)" }} />
           <div style={{ position: "relative", zIndex: 2, height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", padding: "0 24px 10vh", textAlign: "center" }}>
             <h1 style={{ fontSize: "clamp(3rem, 10vw, 6.5rem)", color: "#fff", fontWeight: 400, letterSpacing: "0.1em", margin: "0 0 10px", textTransform: "uppercase", lineHeight: 1 }}>Pelican Point</h1>
@@ -355,7 +452,7 @@ export default function App() {
           <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(60px, 8vw, 100px) clamp(20px, 6vw, 80px) 80px" }}>
             <h2 style={sectionHead}>Recommendations for Your Stay</h2>
             {goldLine}
-            <p style={{ color: "rgba(245,240,232,0.65)", marginBottom: 44, fontStyle: "italic" }}>Our personal picks to help you make the most of San Sebastian and the surrounding area.</p>
+            <p style={{ color: "rgba(245,240,232,0.65)", marginBottom: 44, fontStyle: "italic" }}>Everything you need to make the most of your time at Pelican Point and the surrounding Bazaruto Archipelago.</p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))", gap: 20 }}>
               {RECOMMENDATIONS.map(rec => (
                 <div key={rec.category} style={cardStyle}>
