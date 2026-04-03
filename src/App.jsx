@@ -272,7 +272,7 @@ export default function App() {
 
         {/* ── HERO ── */}
         <div ref={el => sectionRefs.current.hero = el} style={{ width: "100%", height: "100vh", position: "relative", overflow: "hidden", flexShrink: 0 }}>
-          <div style={{ position: "absolute", inset: 0, backgroundImage: 'url("/Mum Wading in Water.jpeg")', backgroundSize: "cover", backgroundPosition: "center 40%" }} />
+          <div style={{ position: "absolute", inset: 0, backgroundImage: 'url("/Mum Wading in Water.jpeg")', backgroundSize: "cover", backgroundPosition: "center 65%" }} />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.6) 100%)" }} />
           <div style={{ position: "relative", zIndex: 2, height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", padding: "0 24px 10vh", textAlign: "center" }}>
             <h1 style={{ fontSize: "clamp(3rem, 10vw, 6.5rem)", color: "#fff", fontWeight: 400, letterSpacing: "0.1em", margin: "0 0 10px", textTransform: "uppercase", lineHeight: 1 }}>Pelican Point</h1>
@@ -292,9 +292,6 @@ export default function App() {
             </div>
           </div>
         </div>
-
-        {/* ── DIVIDER 2 ── */}
-        <Divider />
 
         {/* ── STAY ── */}
         <div ref={el => sectionRefs.current.stay = el} style={{ width: "100%", background: "#1A3A4A" }}>
@@ -476,17 +473,7 @@ export default function App() {
                         </div>
                       );
                     })}
-                  {rec.photo && (
-                    <div style={{ marginTop: 16, borderRadius: 2, overflow: "hidden" }}>
-                      <img src={rec.photo} alt={rec.category} style={{ width: "100%", height: "auto", display: "block" }} />
-                      {rec.photoCaption && <p style={{ fontSize: "0.75rem", color: "#888", fontStyle: "italic", margin: "8px 0 0" }}>{rec.photoCaption}</p>}
-                    </div>
-                  )}
-                  {!rec.photo && (
-                    <div style={{ marginTop: 16, background: "#f5f5f5", borderRadius: 2, aspectRatio: "16/9", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <p style={{ color: "#ccc", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", margin: 0 }}>Photo coming soon</p>
-                    </div>
-                  )}
+
                 </div>
               ))}
             </div>
@@ -512,6 +499,7 @@ export default function App() {
               ))}
             </div>
           </div>
+        </div>
 
         {/* ── SANCTUARY MAP ── */}
         <div ref={el => sectionRefs.current.sanctuarymap = el} style={{ width: "100%", background: "#1A3A4A" }}>
