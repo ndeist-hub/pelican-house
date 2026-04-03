@@ -272,12 +272,12 @@ export default function App() {
 
         {/* ── HERO ── */}
         <div ref={el => sectionRefs.current.hero = el} style={{ width: "100%", height: "100vh", position: "relative", overflow: "hidden", flexShrink: 0 }}>
-          <div style={{ position: "absolute", inset: 0, backgroundImage: 'url("/Mum Wading in Water.jpeg")', backgroundSize: "contain", backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundColor: "#1A3A4A" }} />
+          <div style={{ position: "absolute", inset: 0, backgroundImage: 'url("/Mum Wading in Water.jpeg")', backgroundSize: "contain", backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundColor: "#3D5E4A" }} />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.6) 100%)" }} />
           <div style={{ position: "relative", zIndex: 2, height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", padding: "0 24px 10vh", textAlign: "center" }}>
             <h1 style={{ fontSize: "clamp(3rem, 10vw, 6.5rem)", color: "#fff", fontWeight: 400, letterSpacing: "0.1em", margin: "0 0 10px", textTransform: "uppercase", lineHeight: 1 }}>Pelican Point</h1>
             <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "0.78rem", letterSpacing: "0.35em", textTransform: "uppercase", marginBottom: 44 }}>San Sebastian · Mozambique</p>
-            <button onClick={() => scrollTo("story")} style={{ background: "transparent", color: "#fff", border: "1px solid rgba(255,255,255,0.55)", padding: "13px 44px", cursor: "pointer", fontFamily: font, fontSize: "0.65rem", letterSpacing: "0.28em", textTransform: "uppercase" }}>Welcome</button>
+            <button onClick={() => scrollTo("stay")} style={{ background: "transparent", color: "#fff", border: "1px solid rgba(255,255,255,0.55)", padding: "13px 44px", cursor: "pointer", fontFamily: font, fontSize: "0.65rem", letterSpacing: "0.28em", textTransform: "uppercase" }}>Book</button>
           </div>
         </div>
 
@@ -514,21 +514,21 @@ export default function App() {
           </div>
 
         {/* ── SANCTUARY MAP ── */}
-        <div ref={el => sectionRefs.current.sanctuarymap = el} style={{ width: "100%", minHeight: "100vh", background: "#1A3A4A", flexShrink: 0 }}>
+        <div ref={el => sectionRefs.current.sanctuarymap = el} style={{ width: "100%", background: "#1A3A4A" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(60px, 8vw, 100px) clamp(20px, 6vw, 80px) 80px" }}>
             <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 14 }}>The Sanctuary</h2>
             <div style={{ width: 48, height: 2, background: "#C9A84C", marginBottom: 36 }} />
-            <p style={{ color: "rgba(245,240,232,0.65)", marginBottom: 44, fontStyle: "italic", maxWidth: 700 }}>Pelican Point sits within The Sanctuary — 30,000 hectares of protected coastline, wetland and sea on the San Sebastian Peninsula, part of the greater Bazaruto Archipelago.</p>
-            <div style={{ width: "100%", background: "#1A3A4A", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              {/* Replace sanctuary-map.png with your map image */}
-              <img src="/sanctuary-map.png" alt="The Sanctuary Map" style={{ width: "100%", maxWidth: 900, display: "block", margin: "0 auto" }}
-                onError={e => { e.target.style.display = "none"; e.target.nextSibling.style.display = "flex"; }}
-              />
-              <div style={{ display: "none", width: "100%", height: 500, alignItems: "center", justifyContent: "center", border: "1px dashed rgba(26,58,74,0.2)", borderRadius: 4, flexDirection: "column", gap: 12 }}>
-                <p style={{ color: "rgba(245,240,232,0.4)", fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase" }}>Map coming soon</p>
-                <p style={{ color: "#bbb", fontSize: "0.8rem" }}>Upload sanctuary-map.png to your public/ folder</p>
+            <p style={{ color: "rgba(245,240,232,0.65)", marginBottom: 52, fontStyle: "italic", maxWidth: 700 }}>Pelican Point sits within The Sanctuary — 30,000 hectares of protected coastline, wetland and sea on the San Sebastian Peninsula, part of the greater Bazaruto Archipelago.</p>
+            {[
+              { src: "/Map of Sanctuary and Archipelago .png", title: "The Sanctuary & Bazaruto Archipelago" },
+              { src: "/Map of Sanctuary .png", title: "The Sanctuary" },
+              { src: "/Mazarette site numbers.png", title: "Mazarette Site Numbers" },
+            ].map(({ src, title }) => (
+              <div key={title} style={{ marginBottom: 60 }}>
+                <p style={{ fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C9A84C", marginBottom: 16 }}>{title}</p>
+                <img src={src} alt={title} style={{ width: "100%", height: "auto", display: "block", borderRadius: 2 }} />
               </div>
-            </div>
+            ))}
           </div>
         </div>
 
