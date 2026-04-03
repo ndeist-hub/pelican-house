@@ -517,6 +517,62 @@ export default function App() {
                 <img src={src} alt={title} style={{ width: "100%", height: "auto", display: "block", borderRadius: 2 }} />
               </div>
             ))}
+
+            {/* ── IMPORTANT CONTACTS ── */}
+            <p style={{ fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C9A84C", marginBottom: 32, marginTop: 20 }}>Important Contacts</p>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))", gap: 16 }}>
+              {[
+                {
+                  category: "The Sanctuary",
+                  entries: [
+                    { label: "Office", value: "+27 11 100 4689" },
+                    { label: null, value: "+258 87 867 8186" },
+                    { label: "Emergency", value: "+258 84 4631 721" },
+                  ]
+                },
+                {
+                  category: "Emergency Services",
+                  entries: [
+                    { label: "Police", value: "+258 84 8989 004" },
+                    { label: "Police Emergency", value: "112" },
+                    { label: "NETCARE Medical", value: "911" },
+                  ]
+                },
+                {
+                  category: "Travel & Transport",
+                  entries: [
+                    { label: "Airport", value: "+258 293 83300" },
+                    { label: null, value: "+258 293 82207" },
+                    { label: "Air Link", value: "+258 293 82482" },
+                    { label: "LAM", value: "+258 293 82330" },
+                  ]
+                },
+                {
+                  category: "Helicopter & Harbour",
+                  entries: [
+                    { label: "Helicopter Service", value: "+27 (0)11 433 6437" },
+                    { label: null, value: "+258 844 106 887" },
+                    { label: null, value: "stacey@archipelago.co.za", isEmail: true },
+                    { label: "Harbour Master", value: "+258 84 509 6429" },
+                    { label: "Harbour Assistant", value: "+258 84 515 3815" },
+                  ]
+                },
+              ].map(({ category, entries }) => (
+                <div key={category} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(201,168,76,0.15)", borderRadius: 4, padding: "24px 28px" }}>
+                  <p style={{ fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#C9A84C", margin: "0 0 18px" }}>{category}</p>
+                  {entries.map((entry, i) => (
+                    <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12, padding: "8px 0", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+                      <span style={{ fontSize: "0.75rem", color: "rgba(245,240,232,0.45)", flexShrink: 0, minWidth: 90 }}>{entry.label || ""}</span>
+                      {entry.isEmail
+                        ? <a href={`mailto:${entry.value}`} style={{ fontSize: "0.82rem", color: "rgba(245,240,232,0.8)", textDecoration: "none", textAlign: "right" }}>{entry.value}</a>
+                        : <span style={{ fontSize: "0.82rem", color: "rgba(245,240,232,0.8)", textAlign: "right", fontVariantNumeric: "tabular-nums" }}>{entry.value}</span>
+                      }
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+
           </div>
         </div>
 
