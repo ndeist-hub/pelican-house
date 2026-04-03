@@ -521,29 +521,29 @@ export default function App() {
         </div>
 
         {/* Footer */}
-          <footer style={{ background: "#1A3A4A", color: "rgba(255,255,255,0.4)", textAlign: "center", padding: "36px 24px", fontSize: "0.72rem", letterSpacing: "0.1em", fontFamily: font, marginTop: 60 }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginBottom: 8 }}>
-              <img src="/logo.png" alt="Pelican Point" style={{ width: 32, height: 32, objectFit: "contain" }} />
-              <button onClick={() => scrollTo("hero")} style={{ background: "none", border: "none", color: "#C9A84C", fontFamily: font, fontStyle: "italic", fontSize: "1rem", cursor: "pointer" }}>Pelican Point</button>
-            </div>
-            <div>San Sebastian · Mozambique · <a href="mailto:debbiedeist@icon.co.za" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>debbiedeist@icon.co.za</a></div>
-            <div style={{ marginTop: 8 }}>© 2025 Pelican Point · <a href="https://mozsanctuary.com" target="_blank" rel="noreferrer" style={{ color: "#C9A84C", textDecoration: "none" }}>The Sanctuary</a></div>
-          </footer>
-        </div>
-
-        {/* Lightbox */}
-        {lightbox !== null && (
-          <div onClick={() => setLightbox(null)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.92)", zIndex: 2000, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
-            <div style={{ width: "80vw", maxWidth: 800, aspectRatio: "4/3", background: GALLERY_PLACEHOLDERS[lightbox].color, borderRadius: 3, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase" }}>{GALLERY_PLACEHOLDERS[lightbox].label}</span>
-            </div>
-            <button onClick={() => setLightbox(null)} style={{ position: "fixed", top: 24, right: 24, background: "none", border: "none", color: "#fff", fontSize: 28, cursor: "pointer" }}>✕</button>
-            {lightbox > 0 && <button onClick={e => { e.stopPropagation(); setLightbox(lightbox - 1); }} style={{ position: "fixed", left: 24, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: "#fff", fontSize: 40, cursor: "pointer" }}>‹</button>}
-            {lightbox < GALLERY_PLACEHOLDERS.length - 1 && <button onClick={e => { e.stopPropagation(); setLightbox(lightbox + 1); }} style={{ position: "fixed", right: 24, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: "#fff", fontSize: 40, cursor: "pointer" }}>›</button>}
+        <footer style={{ background: "#1A3A4A", color: "rgba(255,255,255,0.4)", textAlign: "center", padding: "36px 24px", fontSize: "0.72rem", letterSpacing: "0.1em", fontFamily: font, marginTop: 60 }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginBottom: 8 }}>
+            <img src="/logo.png" alt="Pelican Point" style={{ width: 32, height: 32, objectFit: "contain" }} />
+            <button onClick={() => scrollTo("hero")} style={{ background: "none", border: "none", color: "#C9A84C", fontFamily: font, fontStyle: "italic", fontSize: "1rem", cursor: "pointer" }}>Pelican Point</button>
           </div>
-        )}
+          <div>San Sebastian · Mozambique · <a href="mailto:debbiedeist@icon.co.za" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>debbiedeist@icon.co.za</a></div>
+          <div style={{ marginTop: 8 }}>© 2025 Pelican Point · <a href="https://mozsanctuary.com" target="_blank" rel="noreferrer" style={{ color: "#C9A84C", textDecoration: "none" }}>The Sanctuary</a></div>
+        </footer>
 
       </div>
+
+      {/* Lightbox */}
+      {lightbox !== null && (
+        <div onClick={() => setLightbox(null)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.92)", zIndex: 2000, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
+          <div style={{ width: "80vw", maxWidth: 800, aspectRatio: "4/3", background: GALLERY_PLACEHOLDERS[lightbox].color, borderRadius: 3, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase" }}>{GALLERY_PLACEHOLDERS[lightbox].label}</span>
+          </div>
+          <button onClick={() => setLightbox(null)} style={{ position: "fixed", top: 24, right: 24, background: "none", border: "none", color: "#fff", fontSize: 28, cursor: "pointer" }}>✕</button>
+          {lightbox > 0 && <button onClick={e => { e.stopPropagation(); setLightbox(lightbox - 1); }} style={{ position: "fixed", left: 24, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: "#fff", fontSize: 40, cursor: "pointer" }}>‹</button>}
+          {lightbox < GALLERY_PLACEHOLDERS.length - 1 && <button onClick={e => { e.stopPropagation(); setLightbox(lightbox + 1); }} style={{ position: "fixed", right: 24, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: "#fff", fontSize: 40, cursor: "pointer" }}>›</button>}
+        </div>
+      )}
+
     </div>
   );
 }
