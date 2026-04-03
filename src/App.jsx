@@ -113,7 +113,7 @@ const RECOMMENDATIONS = [
       "Sundowners at World's View and Ocean View",
       "Bush drives to the waterhole and lighthouse",
       "Bush walks",
-      "__LINK__Download the Sanctuary Birds Checklist (298 species)|/New-2017-comprehensive-bird-checklist-The-S..pdf",
+      "__LINK__Download the Sanctuary Birds Checklist (298 species)|/New-2017-comprehensive-bird-checklist-The-Sanctuary.pdf",
     ],
   },
 ];
