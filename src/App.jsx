@@ -66,6 +66,8 @@ const RECOMMENDATIONS = [
   {
     category: "Eat & Drink",
     icon: "🍽️",
+    photo: null,
+    photoCaption: null,
     items: [
       "All food and drink can be ordered and delivered to Pelican Point via the Sanctuary office",
       "Mozambique has strict rules on the importation of alcohol and certain food items — please check these before packing",
@@ -74,6 +76,8 @@ const RECOMMENDATIONS = [
   {
     category: "Marine Activities",
     icon: "🌊",
+    photo: null,
+    photoCaption: null,
     items: [
       "SUP boarding and kayaking in the mangroves at high tide",
       "Beach walks at low tide",
@@ -82,12 +86,14 @@ const RECOMMENDATIONS = [
       "Scuba diving — outfitters from Vilankulos come to The Sanctuary by arrangement. Contact Dive Bazaruto or Odyssey Dive",
       "Kitesurfing lessons in Vilankulos — Kitesurfing Centre",
       "Horse riding in Vilankulos — Vilankulos Horse Safaris",
-      "Check the tide table at mozsanctuary.com/info/tide-table",
+      "__LINK__Check the tide table before planning activities|https://mozsanctuary.com/info/tide-table/",
     ],
   },
   {
     category: "Fishing",
     icon: "🎣",
+    photo: null,
+    photoCaption: null,
     items: [
       "Deep-sea fishing with a specialist skipper — available on request",
       "Salt water fly fishing and spinning permitted in the main channels beyond the Marine Protected Areas",
@@ -101,11 +107,13 @@ const RECOMMENDATIONS = [
   {
     category: "Terrestrial Activities",
     icon: "🦒",
+    photo: null,
+    photoCaption: null,
     items: [
       "Sundowners at World's View and Ocean View",
       "Bush drives to the waterhole and lighthouse",
       "Bush walks",
-      "298 bird species recorded in The Sanctuary — a full checklist is available on request",
+      "__LINK__Download the Sanctuary Birds Checklist (298 species)|/New-2017-comprehensive-bird-checklist-The-S..pdf",
     ],
   },
 ];
@@ -196,9 +204,8 @@ function AvailabilityCalendar() {
 
 function Divider() {
   return (
-    <div style={{ width: "100%", height: "60vh", background: "#0D1F2A", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 12 }}>
-      <div style={{ fontSize: 36, opacity: 0.2 }}>▶</div>
-      <p style={{ color: "rgba(255,255,255,0.2)", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", margin: 0 }}>Video coming soon</p>
+    <div style={{ width: "100%", overflow: "hidden", background: "#1A3A4A" }}>
+      <img src="/Pelican Point Image.jpeg" alt="Pelican Point" style={{ width: "100%", height: "auto", display: "block" }} />
     </div>
   );
 }
@@ -265,7 +272,7 @@ export default function App() {
 
         {/* ── HERO ── */}
         <div ref={el => sectionRefs.current.hero = el} style={{ width: "100%", height: "100vh", position: "relative", overflow: "hidden", flexShrink: 0 }}>
-          <img src="/Mum Wading in Water.jpeg" alt="Pelican Point" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "contain", objectPosition: "center center" }} />
+          <div style={{ position: "absolute", inset: 0, backgroundImage: 'url("/Mum Wading in Water.jpeg")', backgroundSize: "contain", backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundColor: "#1A3A4A" }} />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.6) 100%)" }} />
           <div style={{ position: "relative", zIndex: 2, height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", padding: "0 24px 10vh", textAlign: "center" }}>
             <h1 style={{ fontSize: "clamp(3rem, 10vw, 6.5rem)", color: "#fff", fontWeight: 400, letterSpacing: "0.1em", margin: "0 0 10px", textTransform: "uppercase", lineHeight: 1 }}>Pelican Point</h1>
@@ -455,13 +462,31 @@ export default function App() {
             <p style={{ color: "rgba(245,240,232,0.65)", marginBottom: 44, fontStyle: "italic" }}>Everything you need to make the most of your time at Pelican Point and the surrounding Bazaruto Archipelago.</p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))", gap: 20 }}>
               {RECOMMENDATIONS.map(rec => (
-                <div key={rec.category} style={cardStyle}>
+                <div key={rec.category} style={{ ...cardStyle, display: "flex", flexDirection: "column" }}>
                   <div style={{ fontSize: "0.72rem", fontWeight: 700, color: "#1A3A4A", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 16 }}>{rec.icon} {rec.category}</div>
-                  {rec.items.map(item => (
-                    <div key={item} style={{ padding: "9px 0", borderBottom: "1px solid #f5f5f5", color: "#555", fontSize: "0.88rem", display: "flex", gap: 10, alignItems: "flex-start" }}>
-                      <span style={{ color: "#C9A84C", fontSize: 9, marginTop: 4, flexShrink: 0 }}>◆</span>{item}
+                  {rec.items.map(item => {
+                      const isLink = item.startsWith("__LINK__");
+                      const parts = isLink ? item.replace("__LINK__","").split("|") : null;
+                      return (
+                        <div key={item} style={{ padding: "9px 0", borderBottom: "1px solid #f5f5f5", color: "#555", fontSize: "0.88rem", display: "flex", gap: 10, alignItems: "flex-start" }}>
+                          <span style={{ color: "#C9A84C", fontSize: 9, marginTop: 4, flexShrink: 0 }}>◆</span>
+                          {isLink
+                            ? <a href={parts[1]} target="_blank" rel="noreferrer" style={{ color: "#1A3A4A", textDecoration: "underline", fontSize: "0.88rem" }}>{parts[0]}</a>
+                            : item}
+                        </div>
+                      );
+                    })}
+                  {rec.photo && (
+                    <div style={{ marginTop: 16, borderRadius: 2, overflow: "hidden" }}>
+                      <img src={rec.photo} alt={rec.category} style={{ width: "100%", height: "auto", display: "block" }} />
+                      {rec.photoCaption && <p style={{ fontSize: "0.75rem", color: "#888", fontStyle: "italic", margin: "8px 0 0" }}>{rec.photoCaption}</p>}
                     </div>
-                  ))}
+                  )}
+                  {!rec.photo && (
+                    <div style={{ marginTop: 16, background: "#f5f5f5", borderRadius: 2, aspectRatio: "16/9", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <p style={{ color: "#ccc", fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", margin: 0 }}>Photo coming soon</p>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
