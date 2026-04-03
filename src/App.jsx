@@ -545,16 +545,16 @@ export default function App() {
                     { label: null, value: "+258 293 82207" },
                     { label: "Air Link", value: "+258 293 82482" },
                     { label: "LAM", value: "+258 293 82330" },
+                    { label: "Helicopter", value: "+27 (0)11 433 6437" },
+                    { label: null, value: "+258 844 106 887" },
+                    { label: null, value: "stacey@archipelago.co.za", isEmail: true },
                   ]
                 },
                 {
-                  category: "Helicopter & Harbour",
+                  category: "Vilanculos Harbour",
                   entries: [
-                    { label: "Helicopter Service", value: "+27 (0)11 433 6437" },
-                    { label: null, value: "+258 844 106 887" },
-                    { label: null, value: "stacey@archipelago.co.za", isEmail: true },
                     { label: "Harbour Master", value: "+258 84 509 6429" },
-                    { label: "Harbour Assistant", value: "+258 84 515 3815" },
+                    { label: "Assistant", value: "+258 84 515 3815" },
                   ]
                 },
               ].map(({ category, entries }) => (
