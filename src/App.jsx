@@ -3,45 +3,58 @@ import { useState, useEffect, useRef } from "react";
 const CHECKLIST = [
   {
     group: "Daywear",
+    intro: "Summers (Oct–Mar) are hot and humid — pack light, breathable fabrics. Winters (Apr–Sept) are drier and cooler, so bring an extra layer for early mornings and evenings on the water.",
     items: [
-      "Costumes / swimwear",
-      "Rashvests and fishing shirts",
-      "Light windbreaker for boat trips or sunset game drives",
+      "Swimwear and rashvests",
       "Sarongs, light dresses and kaftans",
-      "T-shirt and shorts you don't mind getting wet",
-      "Long-sleeve linen or cotton shirts",
-      "Leggings or light trousers with walking shoes — there are ticks, snakes and thorns, so bring gear that provides adequate protection on walks",
+      "Linen or cotton shirts, T-shirts and shorts",
+      "Light long-sleeve layer for the cooler months",
+      "Leggings or light trousers and appropriate bush walking shoes for protection against ticks, snakes and thorns",
+      "Light windbreaker — for boat trips and game drives",
+      "Exercise gear — plan for thick sand if you plan to run",
       "Cap or hat and sunglasses",
-      "Water shoes for wading at low tide and watersports — there are razor clams in some areas",
       "Slip-slops",
-      "Exercise gear — prepare for thick sand if you want to run",
-      "Sunblock (best brand for no stains on whites) and anti-sun treatments",
-      "Repellent for ticks and mosquitoes",
-      "Binoculars",
-      "Fins and goggles",
-      "Fishing and kiting gear",
     ],
   },
   {
     group: "Nightwear",
+    intro: "After 5pm, change into loose-fitting, breathable clothing that covers arms and legs — linen or light cotton in light colours works best as protection against mosquitoes and insects.",
     items: [
-      "After 5pm, change into mosquito and insect-proof clothing — loose-fitting, breathable materials (linen or light cotton) that cover arms and legs. Light colours work best",
-      "Pull-on pants — kikoi, pyjama style or very light single-jersey trackpant",
-      "Long-sleeve shirt in very light fabric or long-sleeve t-shirt",
-      "Long-sleeve kaftans",
-      "A sweatshirt for the colder months",
-      "Espadrilles or a light, soft shoe for walking around at night",
-      "Pocket torch — very useful at night",
+      "Pull-on pants — kikoi, pyjama-style or light trackpant",
+      "Long-sleeve shirt or kaftan in light fabric",
+      "Sweatshirt for the cooler months",
+      "Espadrilles or soft shoes for walking at night",
+    ],
+  },
+  {
+    group: "Non-Essential Gear & Accessories",
+    intro: null,
+    items: [
+      "Water shoes — highly recommended for wading at low tide or for watersports",
+      "Fins and goggles",
+      "Fishing and kiting gear",
+      "Binoculars",
+      "Pocket torch — very useful after dark",
+    ],
+  },
+  {
+    group: "Essentials",
+    intro: null,
+    items: [
+      "Sunblock and sun protection",
+      "Tick and mosquito repellent",
     ],
   },
   {
     group: "Travel Insurance",
+    intro: null,
     items: [
       "Take out comprehensive travel insurance covering medical emergencies with emergency evacuation to high-quality trauma facilities in Maputo or Johannesburg",
     ],
   },
   {
     group: "Malaria",
+    intro: null,
     items: [
       "Pelican Point is in a malaria area — discuss medication options with your doctor before arriving",
       "The highest risk is when in Vilankulos. Very few cases have been reported in the Pelican Point area",
@@ -50,13 +63,14 @@ const CHECKLIST = [
     ],
   },
   {
-    group: "Medication",
+    group: "Health & First Aid",
+    intro: null,
     items: [
       "There is a basic first aid kit at the house and on the boat for minor injuries",
       "Bring all your own medication — Pelican Point is in a remote area",
       "Bring a course of antibiotics for more serious infections",
       "Topical mupirocin ointment for minor infections (e.g. Supiroban)",
-      "Antihistamine, stop-itch cream or Mylocort (one of these is important)",
+      "Antihistamine, stop-itch cream or Mylocort",
       "Thick body cream (e.g. Bergamot cream from The Body Shop)",
     ],
   },
@@ -232,9 +246,10 @@ export default function App() {
   const inputStyle = { width: "100%", padding: "11px 14px", border: "1px solid #ddd", borderRadius: 2, fontFamily: font, fontSize: "0.95rem", color: "#2C2C2C", background: "#FAFAF7", boxSizing: "border-box", marginBottom: 16, outline: "none" };
   const Label = ({ children }) => <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#888", marginBottom: 6 }}>{children}</label>;
 
-  const prose = { lineHeight: 1.95, color: "#444", fontSize: "1rem", marginBottom: 20 };
+  const prose = { lineHeight: 1.95, color: "#444", fontSize: "0.88rem", marginBottom: 20 };
   const sectionHead = { fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 14 };
-  const subHead = { fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C9A84C", marginBottom: 14, fontFamily: "'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif", fontWeight: 600 };
+  const subHead = { fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C9A84C", marginBottom: 14, fontFamily: "'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif", fontWeight: 700 };
+  const sectionIntro = { color: "rgba(245,240,232,0.65)", marginBottom: 44, fontStyle: "italic", lineHeight: 1.8, fontSize: "0.88rem" };
   const cardStyle = { background: "#fff", borderRadius: 4, padding: 28, border: "1px solid rgba(26,58,74,0.08)", boxShadow: "0 2px 16px rgba(0,0,0,0.08)" };
 
   return (
@@ -283,11 +298,12 @@ export default function App() {
 
         {/* ── STORY ── */}
         <div ref={el => sectionRefs.current.story = el} style={{ width: "100%", background: "#1A3A4A" }}>
-          <div style={{ background: "#1A3A4A", padding: "clamp(40px, 6vw, 80px) 0" }}>
-            <div style={{ maxWidth: 780, margin: "0 auto", padding: "0 clamp(20px, 6vw, 80px)" }}>
-              <p style={{ color: "#C9A84C", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 24, marginTop: 0 }}>The Pelican Point Story</p>
+          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(60px, 8vw, 100px) clamp(20px, 6vw, 80px) 80px" }}>
+            <h2 style={sectionHead}>The Pelican Point Story</h2>
+            {goldLine}
+            <div style={{ maxWidth: 740 }}>
               {DEBBIE_SCRIPT.split("\n\n").map((para, i) => (
-                <p key={i} style={{ fontFamily: font, fontStyle: "italic", fontSize: "1rem", lineHeight: 1.9, color: "rgba(255,255,255,0.82)", marginBottom: 22, marginTop: 0 }}>{para}</p>
+                <p key={i} style={{ fontFamily: font, fontStyle: "italic", fontSize: "0.88rem", lineHeight: 1.9, color: "rgba(255,255,255,0.82)", marginBottom: 22, marginTop: 0 }}>{para}</p>
               ))}
             </div>
           </div>
@@ -300,7 +316,7 @@ export default function App() {
             {goldLine}
 
             {/* Intro */}
-            <p style={{ fontStyle: "italic", marginBottom: 48, lineHeight: 1.95, color: "rgba(245,240,232,0.75)", fontSize: "1rem" }}>Pelican Point accommodates up to 12 adult guests across six en suite bedrooms, and any booking grants exclusive access to the house.</p>
+            <p style={sectionIntro}>Pelican Point accommodates up to 12 adult guests across six en suite bedrooms, and any booking grants exclusive access to the house.</p>
 
             {/* Feature tiles */}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))", gap: 16, marginBottom: 60 }}>
@@ -318,15 +334,15 @@ export default function App() {
               ].map(({ icon, title, text }) => (
                 <div key={title} style={{ background: "#fff", borderRadius: 4, padding: 24, border: "1px solid rgba(26,58,74,0.08)", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
                   <div style={{ fontSize: 28, marginBottom: 12 }}>{icon}</div>
-                  <p style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#1A3A4A", margin: "0 0 10px" }}>{title}</p>
-                  <p style={{ fontSize: "0.88rem", color: "#555", lineHeight: 1.75, margin: 0 }}>{text}</p>
+                  <p style={{ ...subHead, color: "#1A3A4A", margin: "0 0 10px" }}>{title}</p>
+                  <p style={{ fontSize: "0.88rem", color: "#555", lineHeight: 1.8, margin: 0 }}>{text}</p>
                 </div>
               ))}
             </div>
 
             {/* Rooms */}
             <p style={subHead}>The Rooms</p>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "rgba(245,240,232,0.75)", marginBottom: 28 }}>Each room opens onto a different aspect of the surrounding ecosystem.</h3>
+            <p style={sectionIntro}>Each room opens onto a different aspect of the surrounding ecosystem.</p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))", gap: 20, marginBottom: 60 }}>
               {ROOMS.map((room, i) => (
                 <div key={i} style={{ ...cardStyle, padding: 0, overflow: "hidden" }}>
@@ -340,9 +356,8 @@ export default function App() {
                     }
                   </div>
                   <div style={{ padding: "20px 24px 24px" }}>
-                    <p style={{ fontSize: "0.6rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C9A84C", margin: "0 0 6px" }}>Bedroom {i + 1}</p>
                     <h4 style={{ fontSize: "1rem", fontWeight: 400, fontStyle: "italic", color: "#1A3A4A", margin: "0 0 10px" }}>{room.name}</h4>
-                    <p style={{ fontSize: "0.85rem", color: "#555", lineHeight: 1.75, margin: 0 }}>{room.description}</p>
+                    <p style={{ fontSize: "0.88rem", color: "#555", lineHeight: 1.8, margin: 0 }}>{room.description}</p>
                   </div>
                 </div>
               ))}
@@ -350,14 +365,14 @@ export default function App() {
 
             {/* Availability & Booking */}
             <p style={subHead}>Availability</p>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "rgba(245,240,232,0.75)", marginBottom: 28 }}>Check available dates below.</h3>
+            <p style={sectionIntro}>Check available dates below.</p>
             <AvailabilityCalendar />
             <p style={subHead}>Request a Booking</p>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 400, fontStyle: "italic", color: "rgba(245,240,232,0.75)", marginBottom: 28 }}>We'll confirm availability and pricing within 24 hours.</h3>
+            <p style={sectionIntro}>We'll confirm availability and pricing within 24 hours.</p>
             {bookingSubmitted ? (
               <div style={{ background: "#EDF7F0", border: "1px solid #A8D4B8", borderRadius: 4, padding: 36, textAlign: "center", color: "#1A5C30" }}>
                 <div style={{ fontSize: 40, marginBottom: 12 }}>✉️</div>
-                <h3 style={{ margin: "0 0 8px" }}>Request Received!</h3>
+                <h3 style={{ margin: "0 0 8px" }}>Request Received!</p>
                 <p style={{ margin: 0 }}>Thank you, <strong>{bookingForm.name}</strong>. We'll be in touch at <strong>{bookingForm.email}</strong> within 24 hours.</p>
               </div>
             ) : (
@@ -391,7 +406,7 @@ export default function App() {
           <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(60px, 8vw, 100px) clamp(20px, 6vw, 80px) 80px" }}>
             <h2 style={sectionHead}>Guestbook</h2>
             {goldLine}
-            <p style={{ color: "rgba(245,240,232,0.65)", marginBottom: 44, fontStyle: "italic", lineHeight: 1.7 }}>Pelican Point is built on stories — the ones the land holds, and the ones our guests bring. We'd love to hear yours.</p>
+            <p style={sectionIntro}>Pelican Point is built on stories — the ones the land holds, and the ones our guests bring. We'd love to hear yours.</p>
             {!guestbookSubmitted ? (
               <div style={{ background: "#fff", borderRadius: 4, padding: 28, border: "1px solid rgba(26,58,74,0.08)", boxShadow: "0 2px 16px rgba(0,0,0,0.08)", marginBottom: 48, borderTop: "3px solid #C9A84C" }}>
                 <Label>Your Name</Label>
@@ -430,10 +445,13 @@ export default function App() {
           <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(60px, 8vw, 100px) clamp(20px, 6vw, 80px) 80px" }}>
             <h2 style={sectionHead}>Guest Checklist</h2>
             {goldLine}
-            <p style={{ color: "rgba(245,240,232,0.65)", marginBottom: 44, fontStyle: "italic" }}>Everything you need to prepare for a seamless stay at Pelican Point.</p>
+            <p style={sectionIntro}>Everything you need to prepare for a seamless stay at Pelican Point.</p>
             {CHECKLIST.map(group => (
               <div key={group.group} style={{ background: "#fff", borderRadius: 4, padding: 28, marginBottom: 20, border: "1px solid rgba(26,58,74,0.08)", boxShadow: "0 2px 16px rgba(0,0,0,0.08)" }}>
-                <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "#1A3A4A", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 12, paddingBottom: 8, borderBottom: "1px solid #eee" }}>{group.group}</div>
+                <p style={{ ...subHead, color: "#1A3A4A", marginBottom: group.intro ? 10 : 12, paddingBottom: 8, borderBottom: "1px solid #eee" }}>{group.group}</p>
+                {group.intro && (
+                  <p style={{ fontSize: "0.88rem", color: "#666", fontStyle: "italic", lineHeight: 1.75, margin: "0 0 14px" }}>{group.intro}</p>
+                )}
                 {group.items.map(item => {
                   const k = group.group + item; const isChecked = !!checked[k];
                   return (
@@ -441,7 +459,7 @@ export default function App() {
                       <div style={{ width: 20, height: 20, borderRadius: 2, border: isChecked ? "none" : "1px solid rgba(201,168,76,0.6)", background: isChecked ? "#C9A84C" : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all 0.2s" }}>
                         {isChecked && <span style={{ color: "#fff", fontSize: 11, fontWeight: 700 }}>✓</span>}
                       </div>
-                      <span style={{ color: "#444", fontSize: "0.95rem", textDecoration: isChecked ? "line-through" : "none" }}>{item}</span>
+                      <span style={{ color: "#444", fontSize: "0.88rem", lineHeight: 1.6, textDecoration: isChecked ? "line-through" : "none" }}>{item}</span>
                     </div>
                   );
                 })}
@@ -456,11 +474,11 @@ export default function App() {
           <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(60px, 8vw, 100px) clamp(20px, 6vw, 80px) 80px" }}>
             <h2 style={sectionHead}>Recommendations for Your Stay</h2>
             {goldLine}
-            <p style={{ color: "rgba(245,240,232,0.65)", marginBottom: 44, fontStyle: "italic" }}>Everything you need to make the most of your time at Pelican Point and the surrounding Bazaruto Archipelago.</p>
+            <p style={sectionIntro}>Everything you need to make the most of your time at Pelican Point and the surrounding Bazaruto Archipelago.</p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))", gap: 20 }}>
               {RECOMMENDATIONS.map(rec => (
                 <div key={rec.category} style={{ ...cardStyle, display: "flex", flexDirection: "column" }}>
-                  <div style={{ fontSize: "0.72rem", fontWeight: 700, color: "#1A3A4A", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 16 }}>{rec.icon} {rec.category}</div>
+                  <p style={subHead}>{rec.icon} {rec.category}</p>
                   {rec.items.map(item => {
                       const isLink = item.startsWith("__LINK__");
                       const parts = isLink ? item.replace("__LINK__","").split("|") : null;
@@ -486,7 +504,7 @@ export default function App() {
           <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(60px, 8vw, 100px) clamp(20px, 6vw, 80px) 80px" }}>
             <h2 style={sectionHead}>Gallery</h2>
             {goldLine}
-            <p style={{ color: "rgba(245,240,232,0.65)", marginBottom: 44, fontStyle: "italic" }}>Photos of Pelican Point and the wild beauty of The Sanctuary. More images coming soon.</p>
+            <p style={sectionIntro}>Photos of Pelican Point and the wild beauty of The Sanctuary. More images coming soon.</p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(280px, 100%), 1fr))", gap: 10 }}>
               {GALLERY_PLACEHOLDERS.map((item, i) => (
                 <div key={i} onClick={() => setLightbox(i)} style={{ aspectRatio: "4/3", background: item.color, borderRadius: 2, cursor: "pointer", display: "flex", alignItems: "flex-end", overflow: "hidden", position: "relative" }}>
@@ -504,22 +522,22 @@ export default function App() {
         {/* ── SANCTUARY MAP ── */}
         <div ref={el => sectionRefs.current.sanctuarymap = el} style={{ width: "100%", background: "#1A3A4A" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(60px, 8vw, 100px) clamp(20px, 6vw, 80px) 80px" }}>
-            <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, fontStyle: "italic", color: "#F5F0E8", marginBottom: 14 }}>The Sanctuary</h2>
-            <div style={{ width: 48, height: 2, background: "#C9A84C", marginBottom: 36 }} />
-            <p style={{ color: "rgba(245,240,232,0.65)", marginBottom: 52, fontStyle: "italic", maxWidth: 700 }}>Pelican Point sits within The Sanctuary — 30,000 hectares of protected coastline, wetland and sea on the San Sebastian Peninsula, part of the greater Bazaruto Archipelago.</p>
+            <h2 style={sectionHead}>The Sanctuary</h2>
+            {goldLine}
+            <p style={sectionIntro}>Pelican Point sits within The Sanctuary — 30,000 hectares of protected coastline, wetland and sea on the San Sebastian Peninsula, part of the greater Bazaruto Archipelago.</p>
             {[
               { src: "/Map of Sanctuary and Archipelago .png", title: "The Sanctuary & Bazaruto Archipelago" },
               { src: "/Map of Sanctuary .png", title: "The Sanctuary" },
               { src: "/Mazarette site numbers.png", title: "Mazarette Site Numbers" },
             ].map(({ src, title }) => (
               <div key={title} style={{ marginBottom: 60 }}>
-                <p style={{ fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C9A84C", marginBottom: 16 }}>{title}</p>
+                <p style={subHead}>{title}</p>
                 <img src={src} alt={title} style={{ width: "100%", height: "auto", display: "block", borderRadius: 2 }} />
               </div>
             ))}
 
             {/* ── IMPORTANT CONTACTS ── */}
-            <p style={{ fontSize: "0.62rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C9A84C", marginBottom: 32, marginTop: 20 }}>Important Contacts</p>
+            <p style={{ ...subHead, marginTop: 20 }}>Important Contacts</p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))", gap: 16 }}>
               {[
                 {
@@ -559,7 +577,7 @@ export default function App() {
                 },
               ].map(({ category, entries }) => (
                 <div key={category} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(201,168,76,0.15)", borderRadius: 4, padding: "24px 28px" }}>
-                  <p style={{ fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#C9A84C", margin: "0 0 18px" }}>{category}</p>
+                  <p style={{ ...subHead, color: "#C9A84C", margin: "0 0 18px" }}>{category}</p>
                   {entries.map((entry, i) => (
                     <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12, padding: "8px 0", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
                       <span style={{ fontSize: "0.75rem", color: "rgba(245,240,232,0.45)", flexShrink: 0, minWidth: 90 }}>{entry.label || ""}</span>
