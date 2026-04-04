@@ -301,11 +301,9 @@ export default function App() {
           <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(60px, 8vw, 100px) clamp(20px, 6vw, 80px) 80px" }}>
             <h2 style={sectionHead}>The Pelican Point Story</h2>
             {goldLine}
-            <div style={{ maxWidth: 740 }}>
-              {DEBBIE_SCRIPT.split("\n\n").map((para, i) => (
-                <p key={i} style={{ fontFamily: font, fontStyle: "italic", fontSize: "0.88rem", lineHeight: 1.9, color: "rgba(255,255,255,0.82)", marginBottom: 22, marginTop: 0 }}>{para}</p>
-              ))}
-            </div>
+            {DEBBIE_SCRIPT.split("\n\n").map((para, i) => (
+              <p key={i} style={{ fontFamily: font, fontStyle: "italic", fontSize: "0.88rem", lineHeight: 1.9, color: "rgba(255,255,255,0.82)", marginBottom: 22, marginTop: 0, maxWidth: 740 }}>{para}</p>
+            ))}
           </div>
         </div>
 
