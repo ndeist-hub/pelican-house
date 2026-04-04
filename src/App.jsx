@@ -370,7 +370,7 @@ export default function App() {
             {bookingSubmitted ? (
               <div style={{ background: "#EDF7F0", border: "1px solid #A8D4B8", borderRadius: 4, padding: 36, textAlign: "center", color: "#1A5C30" }}>
                 <div style={{ fontSize: 40, marginBottom: 12 }}>✉️</div>
-                <h3 style={{ margin: "0 0 8px" }}>Request Received!</p>
+                <h3 style={{ margin: "0 0 8px" }}>Request Received!</h3>
                 <p style={{ margin: 0 }}>Thank you, <strong>{bookingForm.name}</strong>. We'll be in touch at <strong>{bookingForm.email}</strong> within 24 hours.</p>
               </div>
             ) : (
