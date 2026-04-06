@@ -674,8 +674,8 @@ export default function App() {
             <img src="/favicon.png" alt="Pelican Point" style={{ width: 32, height: 32, objectFit: "contain", borderRadius: "50%" }} />
             <button onClick={() => scrollTo("hero")} style={{ background: "none", border: "none", color: "#C9A84C", fontFamily: font, fontStyle: "italic", fontSize: "1rem", cursor: "pointer" }}>Pelican Point</button>
           </div>
-          <div>San Sebastian · Mozambique · <a href="mailto:debbiedeist@icon.co.za" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>debbiedeist@icon.co.za</a></div>
-          <div style={{ marginTop: 8 }}>© 2025 Pelican Point · <a href="https://mozsanctuary.com" target="_blank" rel="noreferrer" style={{ color: "#C9A84C", textDecoration: "none" }}>The Sanctuary</a></div>
+          <div>San Sebastian · Mozambique</div>
+          <div style={{ marginTop: 8 }}>© 2025 Pelican Point</div>
         </footer>
 
       </div>
