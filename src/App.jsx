@@ -181,10 +181,6 @@ const GALLERY_CAROUSELS = [
     photos: Array.from({ length: 10 }, (_, i) => ({ src: null, label: `The Sanctuary ${i + 1}` })),
   },
   {
-    title: "Marine Life",
-    photos: Array.from({ length: 10 }, (_, i) => ({ src: null, label: `Marine Life ${i + 1}` })),
-  },
-  {
     title: "The Archipelago",
     photos: Array.from({ length: 10 }, (_, i) => ({ src: null, label: `Archipelago ${i + 1}` })),
   },
@@ -372,7 +368,7 @@ export default function App() {
             <h2 style={sectionHead}>The Pelican Point Story</h2>
             {goldLine}
             {DEBBIE_SCRIPT.split("\n\n").map((para, i) => (
-              <p key={i} style={{ fontFamily: font, fontStyle: "italic", fontSize: "0.88rem", lineHeight: 1.9, color: "rgba(255,255,255,0.82)", marginBottom: 22, marginTop: 0, maxWidth: 740 }}>{para}</p>
+              <p key={i} style={{ fontFamily: font, fontStyle: "italic", fontSize: "0.88rem", lineHeight: 1.9, color: "rgba(255,255,255,0.82)", marginBottom: 22, marginTop: 0 }}>{para}</p>
             ))}
             <div style={{ marginTop: 40 }}>
               <div style={{ width: "100%", background: "#0f2830", borderRadius: 2, overflow: "hidden" }}>
@@ -675,7 +671,7 @@ export default function App() {
         {/* Footer */}
         <footer style={{ background: "#1A3A4A", color: "rgba(255,255,255,0.4)", textAlign: "center", padding: "36px 24px", fontSize: "0.72rem", letterSpacing: "0.1em", fontFamily: font, marginTop: 60 }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginBottom: 8 }}>
-            <img src="/logo.png" alt="Pelican Point" style={{ width: 32, height: 32, objectFit: "contain" }} />
+            <img src="/favicon.png" alt="Pelican Point" style={{ width: 32, height: 32, objectFit: "contain", borderRadius: "50%" }} />
             <button onClick={() => scrollTo("hero")} style={{ background: "none", border: "none", color: "#C9A84C", fontFamily: font, fontStyle: "italic", fontSize: "1rem", cursor: "pointer" }}>Pelican Point</button>
           </div>
           <div>San Sebastian · Mozambique · <a href="mailto:debbiedeist@icon.co.za" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>debbiedeist@icon.co.za</a></div>
