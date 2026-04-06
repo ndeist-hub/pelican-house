@@ -9,7 +9,7 @@ const CHECKLIST = [
       "Sarongs, light dresses and kaftans",
       "Linen or cotton shirts, T-shirts and shorts",
       "Light long-sleeve layer for the cooler months",
-      "Leggings or light trousers and appropriate bush walking shoes for protection against ticks, snakes and thorns",
+
       "Light windbreaker — for boat trips and game drives",
       "Exercise gear — plan for thick sand if you plan to run",
       "Cap or hat and sunglasses",
@@ -38,14 +38,6 @@ const CHECKLIST = [
     ],
   },
   {
-    group: "Essentials",
-    intro: null,
-    items: [
-      "Sunblock and sun protection",
-      "Tick and mosquito repellent",
-    ],
-  },
-  {
     group: "Travel Insurance",
     intro: null,
     items: [
@@ -53,24 +45,21 @@ const CHECKLIST = [
     ],
   },
   {
-    group: "Malaria",
-    intro: null,
+    group: "Malaria & African Tick-Bite Fever",
+    intro: "Pelican Point is in a malaria area — consult your doctor about prophylaxis before travelling. The risk is highest in Vilankulos town; very few cases have been reported at Pelican Point itself, and all rooms are equipped with mosquito nets. Bush walks also carry a risk of tick bites, which can transmit African Tick-Bite Fever — wearing appropriate clothing and checking yourself after walks is important.",
     items: [
-      "Pelican Point is in a malaria area — discuss medication options with your doctor before arriving",
-      "The highest risk is when in Vilankulos. Very few cases have been reported in the Pelican Point area",
-      "All rooms are equipped with mosquito nets",
-      "Bring mosquito repellent",
+      "Tick and mosquito repellent",
+      "Suitable walking pants and shoes for bush walks",
     ],
   },
   {
     group: "Health & First Aid",
-    intro: null,
+    intro: "Pelican Point is a remote location with limited access to medication and medical care. We strongly recommend consulting your doctor before travelling — both for any personal medication you may need and for advice on recommended vaccinations. A basic first aid kit is kept at the house and on the boat, but guests should come prepared.",
     items: [
-      "There is a basic first aid kit at the house and on the boat for minor injuries",
-      "Bring all your own medication — Pelican Point is in a remote area",
       "Bring a course of antibiotics for more serious infections",
       "Topical mupirocin ointment for minor infections (e.g. Supiroban)",
       "Antihistamine, stop-itch cream or Mylocort",
+      "Sunblock and aftersun",
       "Thick body cream (e.g. Bergamot cream from The Body Shop)",
     ],
   },
@@ -100,6 +89,9 @@ const RECOMMENDATIONS = [
       "Scuba diving — outfitters from Vilankulos come to The Sanctuary by arrangement. Contact Dive Bazaruto or Odyssey Dive",
       "Kitesurfing lessons in Vilankulos — Kitesurfing Centre",
       "Horse riding in Vilankulos — Vilankulos Horse Safaris",
+      "Whale season: August to November",
+      "Turtle nesting season: November to January",
+      "Manta ray & whale sharks: all year round",
       "__LINK__Check the tide table before planning activities|https://mozsanctuary.com/info/tide-table/",
     ],
   },
@@ -141,12 +133,6 @@ const ROOMS = [
   { name: "Bedroom 6", description: "Description coming soon.", photo: null },
 ];
 
-const GALLERY_PLACEHOLDERS = [
-  { label: "Pelican Point", color: "#1A3A4A" },
-  { label: "The Sanctuary", color: "#3D6B4A" },
-  { label: "Bazaruto Archipelago", color: "#2E6B7A" },
-];
-
 const STAFF = [
   { name: "Juvencio", role: "House Manager", photo: null, bio: "Juvencio is the heart of Pelican Point. As house manager, he oversees every detail of your stay — from your arrival to your departure — ensuring everything runs seamlessly and that every guest feels genuinely at home. Any issues during your stay should be directed to Juvencio in the first instance." },
   { name: "Raymondo", role: "Chef", photo: null, bio: "Raymondo brings the flavours of Mozambique to life in every meal. Drawing on fresh local ingredients — fish from the bay, vegetables from the market — he creates dishes that are both deeply rooted in the region and endlessly memorable. Raymondo will help you cook meals and attend to your food-related requirements." },
@@ -156,6 +142,52 @@ const STAFF = [
 
 const BOOKED_DATES = [
   // { start: "2025-07-01", end: "2025-07-14" },
+];
+
+// Carousel photo sets — add src paths when photos are ready
+const CAROUSEL_STORY = [
+  { src: null, label: "Pelican Point" },
+  { src: null, label: "The Estuary" },
+  { src: null, label: "Dune Forest" },
+];
+
+const CAROUSEL_STAY = [
+  { src: "/stay-1.jpg", label: "" },
+  { src: "/stay-2.jpg", label: "" },
+  { src: "/stay-3.jpg", label: "" },
+  { src: "/stay-4.jpg", label: "" },
+  { src: "/stay-5.jpg", label: "" },
+  { src: "/stay-6.jpg", label: "" },
+  { src: "/stay-7.jpg", label: "" },
+];
+
+const CAROUSEL_RECOMMENDATIONS = [
+  { src: "/rec-1.jpg", label: "" },
+  { src: "/rec-2.jpg", label: "" },
+  { src: "/rec-3.jpg", label: "" },
+  { src: "/rec-4.jpg", label: "" },
+  { src: "/rec-5.jpg", label: "" },
+  { src: "/rec-6.jpg", label: "" },
+  { src: "/rec-7.jpg", label: "" },
+];
+
+const GALLERY_CAROUSELS = [
+  {
+    title: "Pelican Point",
+    photos: Array.from({ length: 10 }, (_, i) => ({ src: null, label: `Pelican Point ${i + 1}` })),
+  },
+  {
+    title: "The Sanctuary",
+    photos: Array.from({ length: 10 }, (_, i) => ({ src: null, label: `The Sanctuary ${i + 1}` })),
+  },
+  {
+    title: "Marine Life",
+    photos: Array.from({ length: 10 }, (_, i) => ({ src: null, label: `Marine Life ${i + 1}` })),
+  },
+  {
+    title: "The Archipelago",
+    photos: Array.from({ length: 10 }, (_, i) => ({ src: null, label: `Archipelago ${i + 1}` })),
+  },
 ];
 
 const NAV_SECTIONS = [
@@ -216,10 +248,49 @@ function AvailabilityCalendar() {
   );
 }
 
-function Divider() {
+function PhotoCarousel({ photos, maxWidth }) {
+  const [index, setIndex] = useState(0);
+  const [errored, setErrored] = useState({});
+  const prev = (e) => { e.stopPropagation(); setIndex(i => (i - 1 + photos.length) % photos.length); };
+  const next = (e) => { e.stopPropagation(); setIndex(i => (i + 1) % photos.length); };
+  const current = photos[index];
+  const showPlaceholder = !current.src || errored[index];
+  const containerStyle = {
+    width: "100%",
+    maxWidth: maxWidth || "100%",
+    margin: "0 auto",
+    position: "relative",
+    background: "#0f2830",
+    overflow: "hidden",
+    borderRadius: 2,
+  };
+  const btnStyle = {
+    position: "absolute", top: "50%", transform: "translateY(-50%)",
+    background: "rgba(0,0,0,0.35)", border: "none", color: "#fff",
+    fontSize: 28, cursor: "pointer", padding: "12px 16px", zIndex: 10,
+    lineHeight: 1,
+  };
   return (
-    <div style={{ width: "100%", overflow: "hidden", background: "#1A3A4A" }}>
-      <img src="/Pelican Point Image.jpeg" alt="Pelican Point" style={{ width: "100%", height: "auto", display: "block" }} />
+    <div style={containerStyle}>
+      {showPlaceholder
+        ? (
+          <div style={{ aspectRatio: "16/7", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10 }}>
+            <span style={{ color: "rgba(255,255,255,0.18)", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase" }}>Photo coming soon</span>
+          </div>
+        )
+        : <img src={current.src} alt={current.label || ""} onError={() => setErrored(e => ({ ...e, [index]: true }))} style={{ width: "100%", height: "auto", display: "block" }} />
+      }
+      {photos.length > 1 && (
+        <>
+          <button onClick={prev} style={{ ...btnStyle, left: 0 }}>‹</button>
+          <button onClick={next} style={{ ...btnStyle, right: 0 }}>›</button>
+          <div style={{ position: "absolute", bottom: 14, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 6 }}>
+            {photos.map((_, i) => (
+              <div key={i} onClick={e => { e.stopPropagation(); setIndex(i); }} style={{ width: 6, height: 6, borderRadius: "50%", background: i === index ? "#C9A84C" : "rgba(255,255,255,0.35)", cursor: "pointer", transition: "background 0.2s" }} />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }
@@ -232,7 +303,6 @@ export default function App() {
   const [reviews, setReviews] = useState([]);
   const [guestbookSubmitted, setGuestbookSubmitted] = useState(false);
   const [checked, setChecked] = useState({});
-  const [lightbox, setLightbox] = useState(null);
   const containerRef = useRef(null);
   const sectionRefs = useRef({});
 
@@ -241,7 +311,7 @@ export default function App() {
   const handleGuestbook = () => { if (guestbookForm.name && guestbookForm.text) { setReviews(prev => [{ ...guestbookForm, date: guestbookForm.date || new Date().toLocaleDateString("en-GB", { month: "long", year: "numeric" }) }, ...prev]); setGuestbookSubmitted(true); } };
   const scrollTo = (id) => { const el = sectionRefs.current[id]; if (el) el.scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); };
 
-  useEffect(() => { document.body.style.overflow = (menuOpen || lightbox !== null) ? "hidden" : ""; return () => { document.body.style.overflow = ""; }; }, [menuOpen, lightbox]);
+  useEffect(() => { document.body.style.overflow = menuOpen ? "hidden" : ""; return () => { document.body.style.overflow = ""; }; }, [menuOpen]);
 
   const inputStyle = { width: "100%", padding: "11px 14px", border: "1px solid #ddd", borderRadius: 2, fontFamily: font, fontSize: "0.95rem", color: "#2C2C2C", background: "#FAFAF7", boxSizing: "border-box", marginBottom: 16, outline: "none" };
   const Label = ({ children }) => <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#888", marginBottom: 6 }}>{children}</label>;
@@ -304,6 +374,13 @@ export default function App() {
             {DEBBIE_SCRIPT.split("\n\n").map((para, i) => (
               <p key={i} style={{ fontFamily: font, fontStyle: "italic", fontSize: "0.88rem", lineHeight: 1.9, color: "rgba(255,255,255,0.82)", marginBottom: 22, marginTop: 0, maxWidth: 740 }}>{para}</p>
             ))}
+            <div style={{ marginTop: 40 }}>
+              <div style={{ width: "100%", background: "#0f2830", borderRadius: 2, overflow: "hidden" }}>
+                <div style={{ aspectRatio: "16/7", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10 }}>
+                  <span style={{ color: "rgba(255,255,255,0.18)", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase" }}>Photo coming soon</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -315,6 +392,9 @@ export default function App() {
 
             {/* Intro */}
             <p style={sectionIntro}>Pelican Point accommodates up to 12 adult guests across six en suite bedrooms, and any booking grants exclusive access to the house.</p>
+            <div style={{ marginBottom: 48 }}>
+              <PhotoCarousel photos={CAROUSEL_STAY} />
+            </div>
 
             {/* Feature tiles */}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))", gap: 16, marginBottom: 60 }}>
@@ -328,7 +408,7 @@ export default function App() {
                 { icon: "🚙", title: "Game Vehicle", text: "Available for excursions into the Sanctuary's interior. A guide is provided to drive at all times — no guests are permitted to drive the vehicle." },
                 { icon: "🌊", title: "Water Sports", text: "Two kayaks and SUP boards on site. A Hobie Cat is available on request. Guests are encouraged to bring their own snorkelling, fishing or preferred water sports gear." },
                 { icon: "📡", title: "Wi-Fi (Starlink)", text: "Wi-Fi is available via Starlink. Currently a little slow, so for those needing to work we recommend supplementing with a local cellular data package." },
-                { icon: "📋", title: "House Rules", text: "No glass in the pool · No smoking · No recreational drugs on the premises · All guests must adhere to the Sanctuary's noise policy." },
+                { icon: "📋", title: "House Rules", text: "No glass in the pool · No smoking · No recreational drugs on the premises · All guests must adhere to the Sanctuary's noise policy · Guests may not drive the boat or game vehicle at any time." },
               ].map(({ icon, title, text }) => (
                 <div key={title} style={{ background: "#fff", borderRadius: 4, padding: 24, border: "1px solid rgba(26,58,74,0.08)", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
                   <div style={{ fontSize: 28, marginBottom: 12 }}>{icon}</div>
@@ -473,6 +553,9 @@ export default function App() {
             <h2 style={sectionHead}>Recommendations for Your Stay</h2>
             {goldLine}
             <p style={sectionIntro}>Everything you need to make the most of your time at Pelican Point and the surrounding Bazaruto Archipelago.</p>
+            <div style={{ marginBottom: 48 }}>
+              <PhotoCarousel photos={CAROUSEL_RECOMMENDATIONS} />
+            </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))", gap: 20 }}>
               {RECOMMENDATIONS.map(rec => (
                 <div key={rec.category} style={{ ...cardStyle, display: "flex", flexDirection: "column" }}>
@@ -503,14 +586,11 @@ export default function App() {
             <h2 style={sectionHead}>Gallery</h2>
             {goldLine}
             <p style={sectionIntro}>Photos of Pelican Point and the wild beauty of The Sanctuary. More images coming soon.</p>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(280px, 100%), 1fr))", gap: 10 }}>
-              {GALLERY_PLACEHOLDERS.map((item, i) => (
-                <div key={i} onClick={() => setLightbox(i)} style={{ aspectRatio: "4/3", background: item.color, borderRadius: 2, cursor: "pointer", display: "flex", alignItems: "flex-end", overflow: "hidden", position: "relative" }}>
-                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%)" }} />
-                  <span style={{ position: "relative", padding: "14px 16px", color: "rgba(255,255,255,0.8)", fontSize: "0.7rem", letterSpacing: "0.12em", textTransform: "uppercase" }}>{item.label}</span>
-                  <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <span style={{ color: "rgba(255,255,255,0.2)", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase" }}>Photo coming soon</span>
-                  </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(480px, 100%), 1fr))", gap: 20 }}>
+              {GALLERY_CAROUSELS.map((carousel) => (
+                <div key={carousel.title}>
+                  <p style={{ ...subHead, marginBottom: 12 }}>{carousel.title}</p>
+                  <PhotoCarousel photos={carousel.photos} />
                 </div>
               ))}
             </div>
@@ -603,18 +683,6 @@ export default function App() {
         </footer>
 
       </div>
-
-      {/* Lightbox */}
-      {lightbox !== null && (
-        <div onClick={() => setLightbox(null)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.92)", zIndex: 2000, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
-          <div style={{ width: "80vw", maxWidth: 800, aspectRatio: "4/3", background: GALLERY_PLACEHOLDERS[lightbox].color, borderRadius: 3, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase" }}>{GALLERY_PLACEHOLDERS[lightbox].label}</span>
-          </div>
-          <button onClick={() => setLightbox(null)} style={{ position: "fixed", top: 24, right: 24, background: "none", border: "none", color: "#fff", fontSize: 28, cursor: "pointer" }}>✕</button>
-          {lightbox > 0 && <button onClick={e => { e.stopPropagation(); setLightbox(lightbox - 1); }} style={{ position: "fixed", left: 24, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: "#fff", fontSize: 40, cursor: "pointer" }}>‹</button>}
-          {lightbox < GALLERY_PLACEHOLDERS.length - 1 && <button onClick={e => { e.stopPropagation(); setLightbox(lightbox + 1); }} style={{ position: "fixed", right: 24, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: "#fff", fontSize: 40, cursor: "pointer" }}>›</button>}
-        </div>
-      )}
 
     </div>
   );
