@@ -145,11 +145,7 @@ const BOOKED_DATES = [
 ];
 
 // Carousel photo sets — add src paths when photos are ready
-const CAROUSEL_STORY = [
-  { src: null, label: "Pelican Point" },
-  { src: null, label: "The Estuary" },
-  { src: null, label: "Dune Forest" },
-];
+const CAROUSEL_STORY = [];
 
 const CAROUSEL_STAY = [
   { src: "/stay-1.jpg", label: "" },
@@ -371,12 +367,15 @@ export default function App() {
               <p key={i} style={{ fontFamily: font, fontStyle: "italic", fontSize: "0.88rem", lineHeight: 1.9, color: "rgba(255,255,255,0.82)", marginBottom: 22, marginTop: 0 }}>{para}</p>
             ))}
             <div style={{ marginTop: 40 }}>
-              <div style={{ width: "100%", background: "#0f2830", borderRadius: 2, overflow: "hidden" }}>
-                <div style={{ aspectRatio: "16/7", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10 }}>
-                  <span style={{ color: "rgba(255,255,255,0.18)", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase" }}>Photo coming soon</span>
-                </div>
-              </div>
-            </div>
+  <video
+    src="/Houseflyover3.mp4"
+    autoPlay
+    muted
+    loop
+    playsInline
+    style={{ width: "100%", display: "block", borderRadius: 2 }}
+  />
+</div>
           </div>
         </div>
 
